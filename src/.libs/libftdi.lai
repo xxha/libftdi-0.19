@@ -17,7 +17,7 @@ old_library='libftdi.a'
 inherited_linker_flags=''
 
 # Libraries that this one depends upon.
-dependency_libs=' -L/usr/lib /usr/lib/libusb.la'
+dependency_libs=' -L/usr/lib -lusb'
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''
