@@ -391,7 +391,7 @@ serial_read$(EXEEXT): $(serial_read_OBJECTS) $(serial_read_DEPENDENCIES)
 	$(LINK) $(serial_read_OBJECTS) $(serial_read_LDADD) $(LIBS)
 simple$(EXEEXT): $(simple_OBJECTS) $(simple_DEPENDENCIES) 
 	@rm -f simple$(EXEEXT)
-	$(LINK) $(simple_OBJECTS) $(simple_LDADD) $(LIBS)
+	$(LINK) -pthread $(simple_OBJECTS) $(simple_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
