@@ -12,10 +12,10 @@
 #include <fcntl.h>
 #include <linux/input.h>
 #include <linux/uinput.h>
-
+#include <semaphore.h>
 #include <ftdi.h>
 
-
+#define UX400_SEM_CPLD  "UX400_SEM_CPLD"
 #define	UX400VENDOR	0x0403
 #define	UX400PRODUCT	0x6010
 #define	UX400DES	"USB <-> Serial Converter"
@@ -220,6 +220,7 @@ int main(int argc, char *argv[] )
 	unsigned char power = 0;
 	int ret = 0;
 	int onoff = 0;
+	sem_t * sem_id;
 
 	if(argc != 3){
 		printf("usage: ux400mods slot on/off\n");
@@ -231,11 +232,6 @@ int main(int argc, char *argv[] )
 		exit(1);
 	}
 
-	if((ret = gpio_get(&temp))<0){
-		printf("Read gpio failed, exit\n");
-		exit(1);
-	}
-	
 	onoff = atoi(argv[2]);
 
 	if( strcmp(argv[1], "LA") == 0){
@@ -255,6 +251,26 @@ int main(int argc, char *argv[] )
 		exit(0);
 	}
 
+        sem_id = sem_open(UX400_SEM_CPLD, O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH, 1);
+        if(sem_id == SEM_FAILED) {
+                perror("UX400 buzzer sem_open");
+                exit(1);
+        }
+
+        if(sem_wait(sem_id) < 0) {
+                perror("UX400 buzzer sem_wait");
+                exit(1);
+        }
+
+	if((ret = gpio_get(&temp))<0){
+		printf("Read gpio failed, exit\n");
+		exit(1);
+	}
+
+        if(sem_post(sem_id) < 0) {
+                perror("UX400 buzzer sem_post");
+        }
+
 	if(onoff == 0){
 		temp &= ~power;
 	}else{
@@ -262,11 +278,19 @@ int main(int argc, char *argv[] )
 	}
 
 //	printf("GPIO write: 0x%x, onoff: %d, power: 0x%x\n", temp, onoff, power);
+        if(sem_wait(sem_id) < 0) {
+                perror("UX400 buzzer sem_wait");
+                exit(1);
+        }
 
 	if((ret = gpio_set(temp))<0){
 		printf("Read gpio failed, exit\n");
 		exit(1);
 	}
+
+        if(sem_post(sem_id) < 0) {
+                perror("UX400 buzzer sem_post");
+        }
 
 	ftdi_usb_close(&ux400_ftdic);
 	ftdi_deinit(&ux400_ftdic);

@@ -12,13 +12,10 @@
 #include <fcntl.h>
 #include <linux/input.h>
 #include <linux/uinput.h>
-
+#include <semaphore.h>
 #include <ftdi.h>
 
-#include <sys/wait.h>
-#include <sys/stat.h>        /* For mode constants */
-#include <semaphore.h>
-
+#define UX400_SEM_CPLD  "UX400_SEM_CPLD"
 #define	UX400VENDOR	0x0403
 #define	UX400PRODUCT	0x6010
 #define	UX400DES	"USB <-> Serial Converter"
@@ -32,49 +29,12 @@
 
 #define	FAN_SLEEP		20
 
-//#define	FAN_TEST		1
-//#define	POWERKEY_TEST		1
-//#define	KEYS_TEST		1
-//#define	BACKLIGHT_TEST	1
-
-//#define		VFL_TEST	1
-//#define		OPM_TEST	1
-
 //#define		MODGPIO_TEST	1
-
-#ifdef VFL_TEST
-        #define VFL_ON          1
-        #define VFL_OFF         0
-        #define VFL_BLINK       1
-	#define	VFL_STABLE	0
-#endif
-
-#ifdef OPM_TEST
-	#define	OPM_ON		1
-	#define	OPM_OFF		0
-#endif
-
-#define	POWERKEY		0x01
-
-#define	BUZZER_DELAY		250000
 
 #define	UX400_LOCAL_SN		"USBLOCALBUS01"
 
-#define	BACKLIGHT_OFFSET	0x01
-#define	POWERKEY_OFFSET		0x08
-#define	KEYOFFSET		0x0A
-
-#define	REG1_OFFSET		0x00
 #define	REG_GPIO_OFFSET		0x03
 #define	REG_CPLDVER		0x15
-
-#define	VEEX_KEY_BACKLIGHT	0x1A
-#define	VEEX_KEY_SUMARY		0x16
-#define	VEEX_KEY_HELP		0x0E
-#define	VEEX_KEY_FILE		0x19
-#define	VEEX_KEY_HISTORY	0x15
-
-#define	UX400_SEM_CPLD	"UX400_SEM_CPLD"
 
 
 struct ftdi_context ux400_ftdic;
@@ -82,33 +42,35 @@ struct ftdi_context ux400_ftdic;
 int Read_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len);
 int Write_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len);
 
-int buzzer(int on);
 int sys_init();
 
 
-
-int buzzer(int on)
-{
+int gpio_set(unsigned char gpio)
+{	
 	int ret = 0;
-	unsigned char data;
 
-	if((ret = Read_bus(&ux400_ftdic, 0x00, REG1_OFFSET, &data, 1) < 0))
+        if(( ret = Write_bus(&ux400_ftdic, 0x00, REG_GPIO_OFFSET, &gpio, 1)) < 0)
 	{
-		printf("Read REG1_OFFSET failed.\n");
-		return -1;
-	}
-
-	if(on == 1) data |= 0x04;
-	else data &= ~0x04;
-
-	if(( ret = Write_bus(&ux400_ftdic, 0x00, REG1_OFFSET, &data, 1)) < 0)
-	{
-		printf("Write buzz reg failed!\n");
+		printf("Write GPIO reg failed!\n");
 		return -1;
 	}
 
 	return 0;
 }
+
+int gpio_get(unsigned char * gpio)
+{	
+	int ret = 0;
+
+        if(( ret = Read_bus(&ux400_ftdic, 0x00, REG_GPIO_OFFSET, gpio, 1)) < 0)
+	{
+		printf("Read GPIO reg failed!\n");
+		return -1;
+	}
+
+	return 0;
+}
+
 
 
 int Read_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)
@@ -190,6 +152,31 @@ int sys_init()
 		return EXIT_FAILURE;
 	}
 
+#if 0
+	if ((ret = ftdi_usb_find_all(&ux400_ftdic, &devlist, UX400VENDOR, UX400PRODUCT)) < 0)
+	{
+		fprintf(stderr, "ftdi_usb_find_all failed: %d (%s)\n", ret, ftdi_get_error_string(&ux400_ftdic));
+		return EXIT_FAILURE;
+	}
+
+	printf("Number of FTDI devices found: %d\n", ret);
+
+	i = 0;
+	for (curdev = devlist; curdev != NULL; i++)
+	{
+		printf("Checking device: %d\n", i);
+		if ((ret = ftdi_usb_get_strings(&ux400_ftdic, curdev->dev, manufacturer, 128, description, 128, serialno, 128)) < 0)
+		{
+		    fprintf(stderr, "ftdi_usb_get_strings failed: %d (%s)\n", ret, ftdi_get_error_string(&ux400_ftdic));
+		    return EXIT_FAILURE;
+		}
+		printf("Manufacturer: %s, Description: %s, Serial number: %s\n\n", manufacturer, description, serialno);
+		curdev = curdev->next;
+	}
+
+	ftdi_list_free(&devlist);
+#endif
+
 	if((ret = ftdi_usb_open_desc(&ux400_ftdic, UX400VENDOR, UX400PRODUCT, NULL, UX400_LOCAL_SN)) < 0)
 	{
 	    fprintf(stderr, "ftdi_usb_open_desc failed: %d (%s)\n", ret, ftdi_get_error_string(&ux400_ftdic));
@@ -229,44 +216,84 @@ int sys_init()
 int main(int argc, char *argv[] )
 {
 	unsigned char fan = 0;
-	char temp = 0;
+	unsigned char temp = 0;
+	unsigned char power = 0;
 	int ret = 0;
-	int data = 0;
+	int onoff = 0;
 	sem_t * sem_id;
 
-	if(argc != 2){
-		printf("usage: ux400buzz on_off\n");
+	if(argc != 3){
+		printf("usage: ux400mods slot on/off\n");
 		exit(0);
 	}
 
-	if((ret = sys_init()) < 0 )
-	{
+	if((ret = sys_init())<0){
 		printf("LIBFTDI init failed, exit\n");
 		exit(1);
 	}
 
-	data = atoi(argv[1]);
+	onoff = atoi(argv[2]);
 
-	if(data >= 1) data = 1;
-	else data = 0;
+	if( strcmp(argv[1], "LA") == 0){
+		power = 0x04;
+	}else if( strcmp(argv[1], "LB") == 0){
+		power = 0x02;
+	}else if( strcmp(argv[1], "LC") == 0){
+		power = 0x01;
+	}else if( strcmp(argv[1], "RA") == 0){
+		power = 0x10;
+	}else if( strcmp(argv[1], "RB") == 0){
+		power = 0x08;
+	}else if( strcmp(argv[1], "RC") == 0){
+		power = 0x20;
+	}else{
+		printf("Unknow slot, usage: ux400gpio LA/LB/LC/RA/RB/RC 1/0\n", temp);
+		exit(0);
+	}
 
-	sem_id = sem_open(UX400_SEM_CPLD, O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH, 1);
-	if(sem_id == SEM_FAILED) {
-		perror("UX400 buzzer sem_open");
+        sem_id = sem_open(UX400_SEM_CPLD, O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH, 1);
+        if(sem_id == SEM_FAILED) {
+                perror("UX400 buzzer sem_open");
+                exit(1);
+        }
+
+        if(sem_wait(sem_id) < 0) {
+                perror("UX400 buzzer sem_wait");
+                exit(1);
+        }
+
+	if((ret = gpio_get(&temp))<0){
+		printf("Read gpio failed, exit\n");
 		exit(1);
 	}
 
-	if(sem_wait(sem_id) < 0) {
-		perror("UX400 buzzer sem_wait");
+        if(sem_post(sem_id) < 0) {
+                perror("UX400 buzzer sem_post");
+        }
+
+	if(onoff == 0){
+		temp &= ~power;
+	}else{
+		temp |= power;
+	}
+
+//	printf("GPIO write: 0x%x, onoff: %d, power: 0x%x\n", temp, onoff, power);
+        if(sem_wait(sem_id) < 0) {
+                perror("UX400 buzzer sem_wait");
+                exit(1);
+        }
+
+	if((ret = gpio_set(temp))<0){
+		printf("Read gpio failed, exit\n");
 		exit(1);
 	}
 
-	buzzer(data);
+        if(sem_post(sem_id) < 0) {
+                perror("UX400 buzzer sem_post");
+        }
 
-	if(sem_post(sem_id) < 0) {
-		perror("UX400 buzzer sem_post");
-	}
-
+	ftdi_usb_close(&ux400_ftdic);
+	ftdi_deinit(&ux400_ftdic);
 }
 
 
