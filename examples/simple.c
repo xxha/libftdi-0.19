@@ -2,6 +2,8 @@
 	Simple example to open a maximum of 4 devices - write some data then read it back.
 	Shows one method of using list devices also.
 	Assumes the devices have a loopback connector on them and they also have a serial number
+
+
 */
 
 #include <stdio.h>
@@ -12,10 +14,10 @@
 #include <linux/uinput.h>
 
 #include <ftdi.h>
+
 #include <sys/wait.h>
 #include <sys/stat.h>        /* For mode constants */
 #include <semaphore.h>
-#include <sys/time.h>
 
 #define	UX400VENDOR	0x0403
 #define	UX400PRODUCT	0x6010
@@ -24,15 +26,12 @@
 #define	UX400_SEM_CPLD	"UX400_SEM_CPLD"
 
 #define BUF_SIZE 0x10
-
-#define	POWERKEY_TEST		1
-//#define	KEYS_TEST		1
 #define	POWERKEY		0x01
 #define	BUZZER_DELAY		250000
+
 #define	BACKLIGHT_OFFSET	0x01
 #define	POWERKEY_OFFSET		0x08
 #define	KEYOFFSET		0x0A
-#define	KEY_INTERVAL		500000
 
 #define	REG1_OFFSET		0x00
 #define	REG_GPIO_OFFSET		0x03
@@ -44,7 +43,6 @@
 #define	VEEX_KEY_FILE		0x19
 #define	VEEX_KEY_HISTORY	0x15
 
-
 struct ftdi_context ux400_ftdic;
 
 int Read_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len);
@@ -55,7 +53,6 @@ int buzzer(int on);
 int fancontrol(unsigned char fandata);
 int sys_init();
 int powercut(void);
-
 
 int uinput_fd;
 
@@ -145,18 +142,11 @@ void key_send(__u16 code, __s32 value)
 
 inline char keyscan(void)
 {
-	unsigned char olddata, newdata;
-	int i = 0;
+	unsigned char data;
+	unsigned int ret;
 
-	Read_bus(&ux400_ftdic, 0x00, KEYOFFSET, &olddata, 1);
-	Read_bus(&ux400_ftdic, 0x00, KEYOFFSET, &newdata, 1);
-	
-	while((olddata != 0x1F)&&(newdata != 0x1F)&&(olddata == newdata)){
-		Read_bus(&ux400_ftdic, 0x00, KEYOFFSET, &newdata, 1);
-		if(i ++ > 4) break;
-	}
-	
-	return olddata;
+	ret = Read_bus(&ux400_ftdic, 0x00, KEYOFFSET, &data, 1);
+	return data;
 }
 
 char cpldver(void)
@@ -169,7 +159,7 @@ char cpldver(void)
 		printf("Read CPLD version failed.\n");
 		return -1;
 	}else{
-		//printf("CPLD VERSION: 0x%x\n", data);
+		printf("CPLD VERSION: 0x%x\n", data);
 	}
 
 	return data;
@@ -249,6 +239,8 @@ int powerkey(void)
 	if((data == 0x1F)||(data == 0x15)||(data == 0x19)||(data == 0xFF)) return 0;
 
 	if((data & POWERKEY) == POWERKEY) {
+		printf("POWER KEY FOUND (0x%x)!!!\n", data);
+
 		if(keypressed == 0){
 			keypressed = 1;
 			buzzer(1);
@@ -437,128 +429,81 @@ int sys_init()
 
 void keys()
 {
-	char oldkey, newkey;
+	char temp;
 	int stat = 0;
 	__u16 keycode;
 	sem_t * sem_id;
-	int ret = 0;
-	struct timeval oldtv, newtv;
-	struct timezone tz;
-	int temp;
+
+	fancontrol(0x33);
 
 	sem_id = sem_open(UX400_SEM_CPLD, O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH, 1);
 	if(sem_id == SEM_FAILED) {
 		perror("UX400 KEY sem_open");
 		exit(1);
 	}
+	
+	system("/usr/bin/ux400-vga");
 
-	fancontrol(0x33);
-	
-	gettimeofday(&oldtv, &tz);
-	
 	for(;;){
 		if(sem_wait(sem_id) < 0) {
 			perror("UX400 KEY sem_wait");
 			exit(1);
 		}
 
-		ret = powerkey();
-
-		if(sem_post(sem_id) < 0) {
-			perror("UX400 KEY sem_post");
-		}
-		
-		if( ret == 1){
+		if(powerkey() == 1){
 			key_send(KEY_POWER, 1 );
-			usleep(50000);
 			key_send(KEY_POWER, 0 );
 
-			sleep(1);
-
 			key_send(KEY_POWER, 1 );
-			usleep(50000);
-			key_send(KEY_POWER, 0 );
-
-			sleep(1);
-
-			key_send(KEY_POWER, 1 );
-			usleep(50000);
 			key_send(KEY_POWER, 0 );
 		}
-
-		if(sem_wait(sem_id) < 0) {
-			perror("UX400 KEY sem_wait");
-			exit(1);
-		}
-		
-		newkey = keyscan();
+		temp = keyscan();
 
 		if(sem_post(sem_id) < 0) {
 			perror("UX400 KEY sem_post");
 		}
 
-//		if(newkey != 0x1F)  printf("key read: 0x%x\n", newkey);
-		
-		gettimeofday(&newtv, &tz);
-				
-//		printf("sec: %d, usec: %d\n", newtv.tv_sec, newtv.tv_usec);
-		
-		if((oldkey == newkey)&&(newkey != 0x1F)){
-			if(newtv.tv_sec == oldtv.tv_sec){
-				temp = newtv.tv_usec - oldtv.tv_sec;
-			}else{
-				temp = newtv.tv_usec + 1000000 - oldtv.tv_sec;
-			}
-			
-			oldtv = newtv;
-//			printf("temp = %d\n", temp);
-
-			if( temp < KEY_INTERVAL)
-				continue;
-		}
-		
-		oldtv = newtv;
-		oldkey = newkey;
-		
-		switch(newkey){
+		switch(temp){
 			case 0x1F:
 			case 0x00:
-
+				if(stat == 1){
+					key_send(keycode, 0);
+				}
+				stat = 0;
 			break;
-
 			case VEEX_KEY_BACKLIGHT:
-				key_send(KEY_F5, 1 );
-				usleep(50000);
-				key_send(KEY_F5, 0 );
+				if(stat != 1) key_send(KEY_F5, 1);
+				stat = 1;
+				keycode = KEY_F5;
 			break;
 			case VEEX_KEY_SUMARY:
-//				printf("SUMARY!\n");
-				key_send(KEY_F6, 1 );
-				usleep(50000);
-				key_send(KEY_F6, 0 );
+				if(stat != 1) key_send(KEY_F6, 1 );
+				stat = 1;
+				keycode = KEY_F6;
 			break;
 			case VEEX_KEY_HELP:
-				key_send(KEY_F3, 1 );
-				usleep(50000);
-				key_send(KEY_F3, 0 );
-			
+				if(stat != 1) key_send(KEY_F3, 1);
+				stat = 1;
+				keycode = KEY_F3;
 			break;
 			case VEEX_KEY_FILE:
-				key_send(KEY_F1, 1 );
-				usleep(50000);
-				key_send(KEY_F1, 0 );
+				if(stat != 1) key_send(KEY_F1, 1);
+				stat = 1;
+				keycode = KEY_F1;
 			break;
 			case VEEX_KEY_HISTORY:
-				key_send(KEY_F4, 1 );
-				usleep(50000);
-				key_send(KEY_F4, 0 );
-			
+				if(stat != 1) key_send(KEY_F4, 1);
+				stat = 1;
+				keycode = KEY_F4;
 			break;
 			default:
-
+				if(stat == 1){
+					key_send(keycode, 0);
+				}
+				stat = 0;
 			break;
 		}
-		usleep(50000);
+		usleep(100000);
 	}
 }
 
@@ -567,9 +512,13 @@ int main(int argc, char *argv[] )
 	unsigned char fan = 0;
 	char temp = 0;
 	int ret = 0;
+	int data = 0;
 	sem_t * sem_id;
 
-	printf("SD upgrade failed.\n");
+	if(argc != 2){
+		printf("usage: ux400bl pwm_value\n");
+		exit(0);
+	}
 
 	if((ret = sys_init())<0)
 	{
@@ -577,38 +526,31 @@ int main(int argc, char *argv[] )
 		exit(1);
 	}
 
-	temp = cpldver();
-	if(temp < 0 )
-	{
-		printf("Read CPLD version failed, exit\n");
+	data = atoi(argv[1]);
+
+//	printf("Backlight value: 0x%x\n", data);
+	
+	if(data < 0) data = 0;
+	if(data > 0x3F) data = 0x3F;
+
+	sem_id = sem_open(UX400_SEM_CPLD, O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH, 1);
+	if(sem_id == SEM_FAILED) {
+		perror("UX400 backlight sem_open");
 		exit(1);
 	}
 
-	sem_id = sem_open(UX400_SEM_CPLD, O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH, 1);
-
-#ifdef POWERKEY_TEST
-	while (1) {
-		if(sem_wait(sem_id) < 0) {
-			perror("UX400 KEY sem_wait");
-			exit(1);
-		}
-
-		ret = powerkey();
-
-		if(sem_post(sem_id) < 0) {
-			perror("UX400 KEY sem_post");
-		}
-
-		if( ret == 1 )
-			exit(0);
-
-		usleep(100000);
+	if(sem_wait(sem_id) < 0) {
+		perror("UX400 backlight sem_wait");
+		exit(1);
 	}
-#endif
 
-#ifdef KEYS_TEST
-	uinput_init();
-	keys();
-#endif
+	backlight(data);
 
+	if(sem_post(sem_id) < 0) {
+		perror("UX400 backlight sem_post");
+	}
 }
+
+
+
+

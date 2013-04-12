@@ -58,6 +58,8 @@ AWK	doc/Makefile	/^AWK = gawk$/;"	m
 AWK	examples/Makefile	/^AWK = gawk$/;"	m
 AWK	src/Makefile	/^AWK = gawk$/;"	m
 BACKLIGHT_OFFSET	examples/main.c	60;"	d	file:
+BACKLIGHT_OFFSET	examples/sdupfail.c	32;"	d	file:
+BACKLIGHT_OFFSET	examples/simple.c	32;"	d	file:
 BACKLIGHT_OFFSET	examples/testopm.c	29;"	d	file:
 BACKLIGHT_OFFSET	examples/ux40040gsn.c	63;"	d	file:
 BACKLIGHT_OFFSET	examples/ux400bl.c	63;"	d	file:
@@ -102,6 +104,8 @@ BREAK_OFF	src/ftdi.h	/^enum ftdi_break_type { BREAK_OFF=0, BREAK_ON=1 };$/;"	e	e
 BREAK_ON	src/ftdi.h	/^enum ftdi_break_type { BREAK_OFF=0, BREAK_ON=1 };$/;"	e	enum:ftdi_break_type
 BUF_SIZE	examples/bucheck.c	22;"	d	file:
 BUF_SIZE	examples/main.c	23;"	d	file:
+BUF_SIZE	examples/sdupfail.c	26;"	d	file:
+BUF_SIZE	examples/simple.c	26;"	d	file:
 BUF_SIZE	examples/ux40040gsn.c	26;"	d	file:
 BUF_SIZE	examples/ux400bl.c	26;"	d	file:
 BUF_SIZE	examples/ux400bootkey.c	26;"	d	file:
@@ -116,6 +120,8 @@ BUF_SIZE	examples/ux400updatepower.c	26;"	d	file:
 BUF_SIZE	examples/ux400upower.c	24;"	d	file:
 BUF_SIZE	examples/ux400vfl.c	26;"	d	file:
 BUZZER_DELAY	examples/main.c	56;"	d	file:
+BUZZER_DELAY	examples/sdupfail.c	31;"	d	file:
+BUZZER_DELAY	examples/simple.c	31;"	d	file:
 BUZZER_DELAY	examples/ux40040gsn.c	59;"	d	file:
 BUZZER_DELAY	examples/ux400bl.c	59;"	d	file:
 BUZZER_DELAY	examples/ux400bootkey.c	34;"	d	file:
@@ -380,7 +386,7 @@ Ftdi	ftdipp/ftdi.cpp	/^namespace Ftdi$/;"	n	file:
 Ftdi	ftdipp/ftdi.hpp	/^namespace Ftdi$/;"	n
 GET_BITS_HIGH	src/ftdi.h	83;"	d
 GET_BITS_LOW	src/ftdi.h	82;"	d
-GPS_BAUDRATE	examples/simple.c	27;"	d	file:
+GPS_BAUDRATE	examples/backup_simple.c	27;"	d	file:
 GPS_BAUDRATE	examples/ux400gps.c	27;"	d	file:
 GREP	Makefile	/^GREP = \/bin\/grep$/;"	m
 GREP	bindings/Makefile	/^GREP = \/bin\/grep$/;"	m
@@ -390,6 +396,8 @@ GREP	examples/Makefile	/^GREP = \/bin\/grep$/;"	m
 GREP	src/Makefile	/^GREP = \/bin\/grep$/;"	m
 GZIP_ENV	Makefile	/^GZIP_ENV = --best$/;"	m
 GetBinStartAddr	examples/main.c	/^static long GetBinStartAddr(unsigned char *pBuff, long len)$/;"	f	file:
+GetBinStartAddr	examples/sdupfail.c	/^static long GetBinStartAddr(unsigned char *pBuff, long len)$/;"	f	file:
+GetBinStartAddr	examples/simple.c	/^static long GetBinStartAddr(unsigned char *pBuff, long len)$/;"	f	file:
 GetBinStartAddr	examples/ux40040gsn.c	/^static long GetBinStartAddr(unsigned char *pBuff, long len)$/;"	f	file:
 GetBinStartAddr	examples/ux400bl.c	/^static long GetBinStartAddr(unsigned char *pBuff, long len)$/;"	f	file:
 GetBinStartAddr	examples/ux400cpld.c	/^static long GetBinStartAddr(unsigned char *pBuff, long len)$/;"	f	file:
@@ -481,6 +489,8 @@ INVERT_RXD	src/ftdi.h	274;"	d
 INVERT_TXD	src/ftdi.h	272;"	d
 Input	ftdipp/ftdi.hpp	/^        Input,$/;"	e	enum:Ftdi::Context::Direction
 KEYOFFSET	examples/main.c	62;"	d	file:
+KEYOFFSET	examples/sdupfail.c	34;"	d	file:
+KEYOFFSET	examples/simple.c	34;"	d	file:
 KEYOFFSET	examples/testopm.c	31;"	d	file:
 KEYOFFSET	examples/ux40040gsn.c	65;"	d	file:
 KEYOFFSET	examples/ux400bl.c	65;"	d	file:
@@ -503,6 +513,8 @@ KEYS_TEST	examples/ux400fanoff.c	37;"	d	file:
 KEYS_TEST	examples/ux400keys.c	39;"	d	file:
 KEYS_TEST	examples/ux400updatepower.c	37;"	d	file:
 KEYS_TEST	examples/ux400upower.c	35;"	d	file:
+KEY_INTERVAL	examples/sdupfail.c	35;"	d	file:
+KEY_INTERVAL	examples/simple.c	35;"	d	file:
 KEY_INTERVAL	examples/ux400keys.c	82;"	d	file:
 LD	Makefile	/^LD = \/usr\/bin\/ld$/;"	m
 LD	bindings/Makefile	/^LD = \/usr\/bin\/ld$/;"	m
@@ -770,6 +782,8 @@ POST_UNINSTALL	doc/Makefile	/^POST_UNINSTALL = :$/;"	m
 POST_UNINSTALL	examples/Makefile	/^POST_UNINSTALL = :$/;"	m
 POST_UNINSTALL	src/Makefile	/^POST_UNINSTALL = :$/;"	m
 POWERKEY	examples/main.c	54;"	d	file:
+POWERKEY	examples/sdupfail.c	30;"	d	file:
+POWERKEY	examples/simple.c	30;"	d	file:
 POWERKEY	examples/ux40040gsn.c	57;"	d	file:
 POWERKEY	examples/ux400bl.c	57;"	d	file:
 POWERKEY	examples/ux400bootkey.c	32;"	d	file:
@@ -782,6 +796,8 @@ POWERKEY	examples/ux400updatepower.c	57;"	d	file:
 POWERKEY	examples/ux400upower.c	55;"	d	file:
 POWERKEY	examples/ux400vfl.c	57;"	d	file:
 POWERKEY_OFFSET	examples/main.c	61;"	d	file:
+POWERKEY_OFFSET	examples/sdupfail.c	33;"	d	file:
+POWERKEY_OFFSET	examples/simple.c	33;"	d	file:
 POWERKEY_OFFSET	examples/testopm.c	30;"	d	file:
 POWERKEY_OFFSET	examples/ux40040gsn.c	64;"	d	file:
 POWERKEY_OFFSET	examples/ux400bl.c	64;"	d	file:
@@ -799,6 +815,8 @@ POWERKEY_OFFSET	examples/ux400rss.c	33;"	d	file:
 POWERKEY_OFFSET	examples/ux400updatepower.c	64;"	d	file:
 POWERKEY_OFFSET	examples/ux400upower.c	62;"	d	file:
 POWERKEY_OFFSET	examples/ux400vfl.c	64;"	d	file:
+POWERKEY_TEST	examples/sdupfail.c	28;"	d	file:
+POWERKEY_TEST	examples/simple.c	28;"	d	file:
 PRE_INSTALL	Makefile	/^PRE_INSTALL = :$/;"	m
 PRE_INSTALL	bindings/Makefile	/^PRE_INSTALL = :$/;"	m
 PRE_INSTALL	bindings/python/Makefile	/^PRE_INSTALL = :$/;"	m
@@ -861,6 +879,8 @@ RECURSIVE_CLEAN_TARGETS	bindings/Makefile	/^RECURSIVE_CLEAN_TARGETS = mostlyclea
 RECURSIVE_TARGETS	Makefile	/^RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \\$/;"	m
 RECURSIVE_TARGETS	bindings/Makefile	/^RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \\$/;"	m
 REG1_OFFSET	examples/main.c	64;"	d	file:
+REG1_OFFSET	examples/sdupfail.c	37;"	d	file:
+REG1_OFFSET	examples/simple.c	37;"	d	file:
 REG1_OFFSET	examples/testopm.c	33;"	d	file:
 REG1_OFFSET	examples/ux40040gsn.c	67;"	d	file:
 REG1_OFFSET	examples/ux400bl.c	67;"	d	file:
@@ -882,6 +902,8 @@ REG4_OFFSET	examples/ux400clocks.c	37;"	d	file:
 REG4_OFFSET	examples/ux400rss.c	37;"	d	file:
 REG5_OFFSET	examples/ux400clocks.c	38;"	d	file:
 REG_CPLDVER	examples/main.c	66;"	d	file:
+REG_CPLDVER	examples/sdupfail.c	39;"	d	file:
+REG_CPLDVER	examples/simple.c	39;"	d	file:
 REG_CPLDVER	examples/testopm.c	35;"	d	file:
 REG_CPLDVER	examples/ux40040gsn.c	69;"	d	file:
 REG_CPLDVER	examples/ux400_eeprom_read.c	27;"	d	file:
@@ -903,6 +925,8 @@ REG_CPLDVER	examples/ux400updatepower.c	69;"	d	file:
 REG_CPLDVER	examples/ux400upower.c	67;"	d	file:
 REG_CPLDVER	examples/ux400vfl.c	69;"	d	file:
 REG_GPIO_OFFSET	examples/main.c	65;"	d	file:
+REG_GPIO_OFFSET	examples/sdupfail.c	38;"	d	file:
+REG_GPIO_OFFSET	examples/simple.c	38;"	d	file:
 REG_GPIO_OFFSET	examples/testopm.c	34;"	d	file:
 REG_GPIO_OFFSET	examples/ux40040gsn.c	68;"	d	file:
 REG_GPIO_OFFSET	examples/ux400bl.c	68;"	d	file:
@@ -920,8 +944,10 @@ REG_GPIO_OFFSET	examples/ux400poweroff.c	68;"	d	file:
 REG_GPIO_OFFSET	examples/ux400updatepower.c	68;"	d	file:
 REG_GPIO_OFFSET	examples/ux400upower.c	66;"	d	file:
 REG_GPIO_OFFSET	examples/ux400vfl.c	68;"	d	file:
+Read_bus	examples/backup_simple.c	/^static int Read_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f	file:
 Read_bus	examples/main.c	/^int Read_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f
-Read_bus	examples/simple.c	/^static int Read_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f	file:
+Read_bus	examples/sdupfail.c	/^int Read_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f
+Read_bus	examples/simple.c	/^int Read_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f
 Read_bus	examples/testopm.c	/^int Read_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f
 Read_bus	examples/ux40040gsn.c	/^int Read_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f
 Read_bus	examples/ux400_eeprom_read.c	/^int Read_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f
@@ -1049,8 +1075,10 @@ TYPE_4232H	src/ftdi.h	/^enum ftdi_chip_type { TYPE_AM=0, TYPE_BM=1, TYPE_2232C=2
 TYPE_AM	src/ftdi.h	/^enum ftdi_chip_type { TYPE_AM=0, TYPE_BM=1, TYPE_2232C=2, TYPE_R=3, TYPE_2232H=4, TYPE_4232H=5 };$/;"	e	enum:ftdi_chip_type
 TYPE_BM	src/ftdi.h	/^enum ftdi_chip_type { TYPE_AM=0, TYPE_BM=1, TYPE_2232C=2, TYPE_R=3, TYPE_2232H=4, TYPE_4232H=5 };$/;"	e	enum:ftdi_chip_type
 TYPE_R	src/ftdi.h	/^enum ftdi_chip_type { TYPE_AM=0, TYPE_BM=1, TYPE_2232C=2, TYPE_R=3, TYPE_2232H=4, TYPE_4232H=5 };$/;"	e	enum:ftdi_chip_type
+UX400DES	examples/backup_simple.c	19;"	d	file:
 UX400DES	examples/main.c	21;"	d	file:
-UX400DES	examples/simple.c	19;"	d	file:
+UX400DES	examples/sdupfail.c	22;"	d	file:
+UX400DES	examples/simple.c	22;"	d	file:
 UX400DES	examples/testopm.c	21;"	d	file:
 UX400DES	examples/ux40040gsn.c	24;"	d	file:
 UX400DES	examples/ux400_eeprom_40g.c	21;"	d	file:
@@ -1077,8 +1105,10 @@ UX400DES	examples/ux400rss.c	24;"	d	file:
 UX400DES	examples/ux400updatepower.c	24;"	d	file:
 UX400DES	examples/ux400upower.c	22;"	d	file:
 UX400DES	examples/ux400vfl.c	24;"	d	file:
+UX400PRODUCT	examples/backup_simple.c	18;"	d	file:
 UX400PRODUCT	examples/main.c	20;"	d	file:
-UX400PRODUCT	examples/simple.c	18;"	d	file:
+UX400PRODUCT	examples/sdupfail.c	21;"	d	file:
+UX400PRODUCT	examples/simple.c	21;"	d	file:
 UX400PRODUCT	examples/testopm.c	20;"	d	file:
 UX400PRODUCT	examples/ux40040gsn.c	23;"	d	file:
 UX400PRODUCT	examples/ux400_eeprom_40g.c	20;"	d	file:
@@ -1106,8 +1136,10 @@ UX400PRODUCT	examples/ux400rss.c	23;"	d	file:
 UX400PRODUCT	examples/ux400updatepower.c	23;"	d	file:
 UX400PRODUCT	examples/ux400upower.c	21;"	d	file:
 UX400PRODUCT	examples/ux400vfl.c	23;"	d	file:
+UX400VENDOR	examples/backup_simple.c	17;"	d	file:
 UX400VENDOR	examples/main.c	19;"	d	file:
-UX400VENDOR	examples/simple.c	17;"	d	file:
+UX400VENDOR	examples/sdupfail.c	20;"	d	file:
+UX400VENDOR	examples/simple.c	20;"	d	file:
 UX400VENDOR	examples/testopm.c	19;"	d	file:
 UX400VENDOR	examples/ux40040gsn.c	22;"	d	file:
 UX400VENDOR	examples/ux400_eeprom_40g.c	19;"	d	file:
@@ -1157,6 +1189,8 @@ UX400_LB_PATH	examples/mtype.c	15;"	d	file:
 UX400_LC_PATH	examples/bucheck.c	16;"	d	file:
 UX400_LC_PATH	examples/mtype.c	16;"	d	file:
 UX400_LOCAL_SN	examples/main.c	58;"	d	file:
+UX400_LOCAL_SN	examples/sdupfail.c	23;"	d	file:
+UX400_LOCAL_SN	examples/simple.c	23;"	d	file:
 UX400_LOCAL_SN	examples/testopm.c	27;"	d	file:
 UX400_LOCAL_SN	examples/ux40040gsn.c	61;"	d	file:
 UX400_LOCAL_SN	examples/ux400_eeprom_40g.c	24;"	d	file:
@@ -1185,17 +1219,17 @@ UX400_RB_PATH	examples/bucheck.c	18;"	d	file:
 UX400_RB_PATH	examples/mtype.c	18;"	d	file:
 UX400_RC_PATH	examples/bucheck.c	19;"	d	file:
 UX400_RC_PATH	examples/mtype.c	19;"	d	file:
-UX400_RS232_A	examples/simple.c	24;"	d	file:
+UX400_RS232_A	examples/backup_simple.c	24;"	d	file:
 UX400_RS232_A	examples/ux400aclock.c	24;"	d	file:
 UX400_RS232_A	examples/ux400aclockcal.c	24;"	d	file:
 UX400_RS232_A	examples/ux400gps.c	24;"	d	file:
 UX400_RS232_A	examples/ux400opmtest.c	24;"	d	file:
-UX400_RS232_B	examples/simple.c	25;"	d	file:
+UX400_RS232_B	examples/backup_simple.c	25;"	d	file:
 UX400_RS232_B	examples/ux400aclock.c	25;"	d	file:
 UX400_RS232_B	examples/ux400aclockcal.c	25;"	d	file:
 UX400_RS232_B	examples/ux400gps.c	25;"	d	file:
 UX400_RS232_B	examples/ux400opmtest.c	25;"	d	file:
-UX400_RS232_SN	examples/simple.c	22;"	d	file:
+UX400_RS232_SN	examples/backup_simple.c	22;"	d	file:
 UX400_RS232_SN	examples/ux400_eeprom_40g.c	25;"	d	file:
 UX400_RS232_SN	examples/ux400_eeprom_read.c	25;"	d	file:
 UX400_RS232_SN	examples/ux400_eeprom_write.c	25;"	d	file:
@@ -1203,6 +1237,8 @@ UX400_RS232_SN	examples/ux400aclock.c	22;"	d	file:
 UX400_RS232_SN	examples/ux400aclockcal.c	22;"	d	file:
 UX400_RS232_SN	examples/ux400gps.c	22;"	d	file:
 UX400_RS232_SN	examples/ux400opmtest.c	22;"	d	file:
+UX400_SEM_CPLD	examples/sdupfail.c	24;"	d	file:
+UX400_SEM_CPLD	examples/simple.c	24;"	d	file:
 UX400_SEM_CPLD	examples/ux40040gsn.c	77;"	d	file:
 UX400_SEM_CPLD	examples/ux400bl.c	77;"	d	file:
 UX400_SEM_CPLD	examples/ux400bootkey.c	52;"	d	file:
@@ -1219,6 +1255,8 @@ UX400_SEM_CPLD	examples/ux400updatepower.c	77;"	d	file:
 UX400_SEM_CPLD	examples/ux400upower.c	75;"	d	file:
 UX400_SEM_CPLD	examples/ux400vfl.c	77;"	d	file:
 VEEX_KEY_BACKLIGHT	examples/main.c	68;"	d	file:
+VEEX_KEY_BACKLIGHT	examples/sdupfail.c	41;"	d	file:
+VEEX_KEY_BACKLIGHT	examples/simple.c	41;"	d	file:
 VEEX_KEY_BACKLIGHT	examples/ux40040gsn.c	71;"	d	file:
 VEEX_KEY_BACKLIGHT	examples/ux400bl.c	71;"	d	file:
 VEEX_KEY_BACKLIGHT	examples/ux400bootkey.c	46;"	d	file:
@@ -1231,6 +1269,8 @@ VEEX_KEY_BACKLIGHT	examples/ux400updatepower.c	71;"	d	file:
 VEEX_KEY_BACKLIGHT	examples/ux400upower.c	69;"	d	file:
 VEEX_KEY_BACKLIGHT	examples/ux400vfl.c	71;"	d	file:
 VEEX_KEY_FILE	examples/main.c	71;"	d	file:
+VEEX_KEY_FILE	examples/sdupfail.c	44;"	d	file:
+VEEX_KEY_FILE	examples/simple.c	44;"	d	file:
 VEEX_KEY_FILE	examples/ux40040gsn.c	74;"	d	file:
 VEEX_KEY_FILE	examples/ux400bl.c	74;"	d	file:
 VEEX_KEY_FILE	examples/ux400bootkey.c	49;"	d	file:
@@ -1243,6 +1283,8 @@ VEEX_KEY_FILE	examples/ux400updatepower.c	74;"	d	file:
 VEEX_KEY_FILE	examples/ux400upower.c	72;"	d	file:
 VEEX_KEY_FILE	examples/ux400vfl.c	74;"	d	file:
 VEEX_KEY_HELP	examples/main.c	70;"	d	file:
+VEEX_KEY_HELP	examples/sdupfail.c	43;"	d	file:
+VEEX_KEY_HELP	examples/simple.c	43;"	d	file:
 VEEX_KEY_HELP	examples/ux40040gsn.c	73;"	d	file:
 VEEX_KEY_HELP	examples/ux400bl.c	73;"	d	file:
 VEEX_KEY_HELP	examples/ux400bootkey.c	48;"	d	file:
@@ -1255,6 +1297,8 @@ VEEX_KEY_HELP	examples/ux400updatepower.c	73;"	d	file:
 VEEX_KEY_HELP	examples/ux400upower.c	71;"	d	file:
 VEEX_KEY_HELP	examples/ux400vfl.c	73;"	d	file:
 VEEX_KEY_HISTORY	examples/main.c	72;"	d	file:
+VEEX_KEY_HISTORY	examples/sdupfail.c	45;"	d	file:
+VEEX_KEY_HISTORY	examples/simple.c	45;"	d	file:
 VEEX_KEY_HISTORY	examples/ux40040gsn.c	75;"	d	file:
 VEEX_KEY_HISTORY	examples/ux400bl.c	75;"	d	file:
 VEEX_KEY_HISTORY	examples/ux400bootkey.c	50;"	d	file:
@@ -1267,6 +1311,8 @@ VEEX_KEY_HISTORY	examples/ux400updatepower.c	75;"	d	file:
 VEEX_KEY_HISTORY	examples/ux400upower.c	73;"	d	file:
 VEEX_KEY_HISTORY	examples/ux400vfl.c	75;"	d	file:
 VEEX_KEY_SUMARY	examples/main.c	69;"	d	file:
+VEEX_KEY_SUMARY	examples/sdupfail.c	42;"	d	file:
+VEEX_KEY_SUMARY	examples/simple.c	42;"	d	file:
 VEEX_KEY_SUMARY	examples/ux40040gsn.c	72;"	d	file:
 VEEX_KEY_SUMARY	examples/ux400bl.c	72;"	d	file:
 VEEX_KEY_SUMARY	examples/ux400bootkey.c	47;"	d	file:
@@ -1336,8 +1382,10 @@ WAIT_ON_HIGH	src/ftdi.h	93;"	d
 WAIT_ON_LOW	src/ftdi.h	94;"	d
 WRITE_EXTENDED	src/ftdi.h	104;"	d
 WRITE_SHORT	src/ftdi.h	102;"	d
+Write_bus	examples/backup_simple.c	/^static int Write_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f	file:
 Write_bus	examples/main.c	/^int Write_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f
-Write_bus	examples/simple.c	/^static int Write_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f	file:
+Write_bus	examples/sdupfail.c	/^int Write_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f
+Write_bus	examples/simple.c	/^int Write_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f
 Write_bus	examples/testopm.c	/^int Write_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f
 Write_bus	examples/ux40040gsn.c	/^int Write_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f
 Write_bus	examples/ux400_eeprom_read.c	/^int Write_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f
@@ -1532,6 +1580,8 @@ async_usb_buffer_size	src/ftdi.h	/^    unsigned int async_usb_buffer_size;$/;"	m
 author	bindings/python/setup.py	/^      author='Tarek Heiland',$/;"	v
 author_email	bindings/python/setup.py	/^      author_email='',$/;"	v
 backlight	examples/main.c	/^int backlight(unsigned char data)$/;"	f
+backlight	examples/sdupfail.c	/^int backlight(unsigned char data)$/;"	f
+backlight	examples/simple.c	/^int backlight(unsigned char data)$/;"	f
 backlight	examples/ux40040gsn.c	/^int backlight(unsigned char data)$/;"	f
 backlight	examples/ux400bl.c	/^int backlight(unsigned char data)$/;"	f
 backlight	examples/ux400cpld.c	/^int backlight(unsigned char data)$/;"	f
@@ -1620,6 +1670,8 @@ builddir	doc/Makefile	/^builddir = .$/;"	m
 builddir	examples/Makefile	/^builddir = .$/;"	m
 builddir	src/Makefile	/^builddir = .$/;"	m
 buzzer	examples/main.c	/^int buzzer(int on)$/;"	f
+buzzer	examples/sdupfail.c	/^int buzzer(int on)$/;"	f
+buzzer	examples/simple.c	/^int buzzer(int on)$/;"	f
 buzzer	examples/ux40040gsn.c	/^int buzzer(int on)$/;"	f
 buzzer	examples/ux400bl.c	/^int buzzer(int on)$/;"	f
 buzzer	examples/ux400buzz.c	/^int buzzer(int on)$/;"	f
@@ -1641,6 +1693,8 @@ const_reverse_iterator	ftdipp/ftdi.hpp	/^    typedef ListType::const_reverse_ite
 context	ftdipp/ftdi.cpp	/^    struct ftdi_context* context;$/;"	m	class:Ftdi::Eeprom::Private	typeref:struct:Ftdi::Eeprom::Private::ftdi_context	file:
 context	ftdipp/ftdi.cpp	/^struct ftdi_context* Context::context()$/;"	f	class:Ftdi::Context
 cpldver	examples/main.c	/^char cpldver(void)$/;"	f
+cpldver	examples/sdupfail.c	/^char cpldver(void)$/;"	f
+cpldver	examples/simple.c	/^char cpldver(void)$/;"	f
 cpldver	examples/testopm.c	/^char cpldver(void)$/;"	f
 cpldver	examples/ux40040gsn.c	/^char cpldver(void)$/;"	f
 cpldver	examples/ux400_eeprom_read.c	/^char cpldver(void)$/;"	f
@@ -1714,6 +1768,8 @@ exec_prefix	examples/Makefile	/^exec_prefix = ${prefix}$/;"	m
 exec_prefix	src/Makefile	/^exec_prefix = ${prefix}$/;"	m
 ext_modules	bindings/python/setup.py	/^      ext_modules=[Extension('_ftdi', ['ftdi_wrap.c'],$/;"	v
 fancontrol	examples/main.c	/^int fancontrol(unsigned char fandata)$/;"	f
+fancontrol	examples/sdupfail.c	/^int fancontrol(unsigned char fandata)$/;"	f
+fancontrol	examples/simple.c	/^int fancontrol(unsigned char fandata)$/;"	f
 fancontrol	examples/ux40040gsn.c	/^int fancontrol(unsigned char fandata)$/;"	f
 fancontrol	examples/ux400bl.c	/^int fancontrol(unsigned char fandata)$/;"	f
 fancontrol	examples/ux400cpld.c	/^int fancontrol(unsigned char fandata)$/;"	f
@@ -1958,6 +2014,8 @@ get_strings	ftdipp/ftdi.cpp	/^int Context::get_strings()$/;"	f	class:Ftdi::Conte
 get_strings_and_reopen	ftdipp/ftdi.cpp	/^int Context::get_strings_and_reopen()$/;"	f	class:Ftdi::Context
 gpio_get	examples/ux400gpio.c	/^int gpio_get(unsigned char * gpio)$/;"	f
 gpio_set	examples/main.c	/^int gpio_set(unsigned char gpio)$/;"	f
+gpio_set	examples/sdupfail.c	/^int gpio_set(unsigned char gpio)$/;"	f
+gpio_set	examples/simple.c	/^int gpio_set(unsigned char gpio)$/;"	f
 gpio_set	examples/ux40040gsn.c	/^int gpio_set(unsigned char gpio)$/;"	f
 gpio_set	examples/ux400bl.c	/^int gpio_set(unsigned char gpio)$/;"	f
 gpio_set	examples/ux400cpld.c	/^int gpio_set(unsigned char gpio)$/;"	f
@@ -2059,6 +2117,8 @@ invert	src/ftdi.h	/^    int invert;$/;"	m	struct:ftdi_eeprom
 is_open	ftdipp/ftdi.cpp	/^bool Context::is_open()$/;"	f	class:Ftdi::Context
 iterator	ftdipp/ftdi.hpp	/^    typedef ListType::iterator iterator;$/;"	t	class:Ftdi::List
 key_send	examples/main.c	/^void key_send(__u16 code, __s32 value)$/;"	f
+key_send	examples/sdupfail.c	/^void key_send(__u16 code, __s32 value)$/;"	f
+key_send	examples/simple.c	/^void key_send(__u16 code, __s32 value)$/;"	f
 key_send	examples/ux40040gsn.c	/^void key_send(__u16 code, __s32 value)$/;"	f
 key_send	examples/ux400bl.c	/^void key_send(__u16 code, __s32 value)$/;"	f
 key_send	examples/ux400cpld.c	/^void key_send(__u16 code, __s32 value)$/;"	f
@@ -2068,6 +2128,8 @@ key_send	examples/ux400poweroff.c	/^void key_send(__u16 code, __s32 value)$/;"	f
 key_send	examples/ux400updatepower.c	/^void key_send(__u16 code, __s32 value)$/;"	f
 key_send	examples/ux400vfl.c	/^void key_send(__u16 code, __s32 value)$/;"	f
 keys	examples/main.c	/^void keys()$/;"	f
+keys	examples/sdupfail.c	/^void keys()$/;"	f
+keys	examples/simple.c	/^void keys()$/;"	f
 keys	examples/ux40040gsn.c	/^void keys()$/;"	f
 keys	examples/ux400bl.c	/^void keys()$/;"	f
 keys	examples/ux400cpld.c	/^void keys()$/;"	f
@@ -2078,6 +2140,8 @@ keys	examples/ux400updatepower.c	/^void keys()$/;"	f
 keys	examples/ux400upower.c	/^void keys()$/;"	f
 keys	examples/ux400vfl.c	/^void keys()$/;"	f
 keyscan	examples/main.c	/^inline char keyscan(void)$/;"	f
+keyscan	examples/sdupfail.c	/^inline char keyscan(void)$/;"	f
+keyscan	examples/simple.c	/^inline char keyscan(void)$/;"	f
 keyscan	examples/ux40040gsn.c	/^inline char keyscan(void)$/;"	f
 keyscan	examples/ux400bl.c	/^inline char keyscan(void)$/;"	f
 keyscan	examples/ux400bootkey.c	/^inline char keyscan(void)$/;"	f
@@ -2125,6 +2189,7 @@ localstatedir	src/Makefile	/^localstatedir = ${prefix}\/var$/;"	m
 main	config.guess	/^		main()$/;"	f
 main	config.guess	/^	main ()$/;"	f
 main	config.guess	/^main ()$/;"	f
+main	examples/backup_simple.c	/^int main(int argc, char *argv[] )$/;"	f
 main	examples/baud_test.c	/^int main(int argc, char **argv)$/;"	f
 main	examples/bitbang.c	/^int main(int argc, char **argv)$/;"	f
 main	examples/bitbang2.c	/^int main(int argc, char **argv)$/;"	f
@@ -2135,6 +2200,7 @@ main	examples/find_all.c	/^int main(void)$/;"	f
 main	examples/find_all_pp.cpp	/^int main(int argc, char **argv)$/;"	f
 main	examples/main.c	/^int main(int argc, char *argv[] )$/;"	f
 main	examples/mtype.c	/^int main(int argc,char *argv[])$/;"	f
+main	examples/sdupfail.c	/^int main(int argc, char *argv[] )$/;"	f
 main	examples/serial_read.c	/^int main(int argc, char **argv)$/;"	f
 main	examples/simple.c	/^int main(int argc, char *argv[] )$/;"	f
 main	examples/testopm.c	/^int main(int argc, char *argv[] )$/;"	f
@@ -2260,6 +2326,8 @@ pkgpythondir	examples/Makefile	/^pkgpythondir = ${pythondir}\/libftdi$/;"	m
 pkgpythondir	src/Makefile	/^pkgpythondir = ${pythondir}\/libftdi$/;"	m
 poll_modem_status	ftdipp/ftdi.cpp	/^unsigned short Context::poll_modem_status()$/;"	f	class:Ftdi::Context
 powercut	examples/main.c	/^int powercut(void)$/;"	f
+powercut	examples/sdupfail.c	/^int powercut(void)$/;"	f
+powercut	examples/simple.c	/^int powercut(void)$/;"	f
 powercut	examples/ux40040gsn.c	/^int powercut(void)$/;"	f
 powercut	examples/ux400bl.c	/^int powercut(void)$/;"	f
 powercut	examples/ux400cpld.c	/^int powercut(void)$/;"	f
@@ -2270,6 +2338,8 @@ powercut	examples/ux400updatepower.c	/^int powercut(void)$/;"	f
 powercut	examples/ux400upower.c	/^int powercut(void)$/;"	f
 powercut	examples/ux400vfl.c	/^int powercut(void)$/;"	f
 powerkey	examples/main.c	/^int powerkey(void)$/;"	f
+powerkey	examples/sdupfail.c	/^int powerkey(void)$/;"	f
+powerkey	examples/simple.c	/^int powerkey(void)$/;"	f
 powerkey	examples/ux40040gsn.c	/^int powerkey(void)$/;"	f
 powerkey	examples/ux400bl.c	/^int powerkey(void)$/;"	f
 powerkey	examples/ux400cpld.c	/^int powerkey(void)$/;"	f
@@ -2341,6 +2411,8 @@ sbindir	examples/Makefile	/^sbindir = ${exec_prefix}\/sbin$/;"	m
 sbindir	src/Makefile	/^sbindir = ${exec_prefix}\/sbin$/;"	m
 self_powered	src/ftdi.h	/^    int self_powered;$/;"	m	struct:ftdi_eeprom
 send_event	examples/main.c	/^int send_event(int fd, __u16 type, __u16 code, __s32 value)$/;"	f
+send_event	examples/sdupfail.c	/^int send_event(int fd, __u16 type, __u16 code, __s32 value)$/;"	f
+send_event	examples/simple.c	/^int send_event(int fd, __u16 type, __u16 code, __s32 value)$/;"	f
 send_event	examples/ux40040gsn.c	/^int send_event(int fd, __u16 type, __u16 code, __s32 value)$/;"	f
 send_event	examples/ux400bl.c	/^int send_event(int fd, __u16 type, __u16 code, __s32 value)$/;"	f
 send_event	examples/ux400cpld.c	/^int send_event(int fd, __u16 type, __u16 code, __s32 value)$/;"	f
@@ -2404,6 +2476,8 @@ subdir	examples/Makefile	/^subdir = examples$/;"	m
 subdir	src/Makefile	/^subdir = src$/;"	m
 suspend_pull_downs	src/ftdi.h	/^    int suspend_pull_downs;$/;"	m	struct:ftdi_eeprom
 sys_init	examples/main.c	/^int sys_init()$/;"	f
+sys_init	examples/sdupfail.c	/^int sys_init()$/;"	f
+sys_init	examples/simple.c	/^int sys_init()$/;"	f
 sys_init	examples/testopm.c	/^int sys_init()$/;"	f
 sys_init	examples/ux40040gsn.c	/^int sys_init()$/;"	f
 sys_init	examples/ux400_eeprom_read.c	/^int sys_init()$/;"	f
@@ -2470,6 +2544,8 @@ transform	examples/Makefile	/^transform = $(program_transform_name)$/;"	m
 transform	src/Makefile	/^transform = $(program_transform_name)$/;"	m
 type	src/ftdi.h	/^    enum ftdi_chip_type type;$/;"	m	struct:ftdi_context	typeref:enum:ftdi_context::ftdi_chip_type
 uinput_fd	examples/main.c	/^int uinput_fd;$/;"	v
+uinput_fd	examples/sdupfail.c	/^int uinput_fd;$/;"	v
+uinput_fd	examples/simple.c	/^int uinput_fd;$/;"	v
 uinput_fd	examples/ux40040gsn.c	/^int uinput_fd;$/;"	v
 uinput_fd	examples/ux400bl.c	/^int uinput_fd;$/;"	v
 uinput_fd	examples/ux400cpld.c	/^int uinput_fd;$/;"	v
@@ -2479,6 +2555,8 @@ uinput_fd	examples/ux400poweroff.c	/^int uinput_fd;$/;"	v
 uinput_fd	examples/ux400updatepower.c	/^int uinput_fd;$/;"	v
 uinput_fd	examples/ux400vfl.c	/^int uinput_fd;$/;"	v
 uinput_init	examples/main.c	/^void uinput_init()$/;"	f
+uinput_init	examples/sdupfail.c	/^void uinput_init()$/;"	f
+uinput_init	examples/simple.c	/^void uinput_init()$/;"	f
 uinput_init	examples/ux40040gsn.c	/^void uinput_init()$/;"	f
 uinput_init	examples/ux400bl.c	/^void uinput_init()$/;"	f
 uinput_init	examples/ux400cpld.c	/^void uinput_init()$/;"	f
@@ -2507,6 +2585,8 @@ ux400_aclock_sys_init	examples/ux400aclockcal.c	/^static int ux400_aclock_sys_in
 ux400_aclock_write_data	examples/ux400aclock.c	/^static int ux400_aclock_write_data(unsigned char * buf, int size)$/;"	f	file:
 ux400_aclock_write_data	examples/ux400aclockcal.c	/^static int ux400_aclock_write_data(unsigned char * buf, int size)$/;"	f	file:
 ux400_ftdic	examples/main.c	/^struct ftdi_context ux400_ftdic;$/;"	v	typeref:struct:ftdi_context
+ux400_ftdic	examples/sdupfail.c	/^struct ftdi_context ux400_ftdic;$/;"	v	typeref:struct:ftdi_context
+ux400_ftdic	examples/simple.c	/^struct ftdi_context ux400_ftdic;$/;"	v	typeref:struct:ftdi_context
 ux400_ftdic	examples/testopm.c	/^struct ftdi_context ux400_ftdic;$/;"	v	typeref:struct:ftdi_context
 ux400_ftdic	examples/ux40040gsn.c	/^struct ftdi_context ux400_ftdic;$/;"	v	typeref:struct:ftdi_context
 ux400_ftdic	examples/ux400_eeprom_read.c	/^struct ftdi_context ux400_ftdic;$/;"	v	typeref:struct:ftdi_context
@@ -2528,15 +2608,15 @@ ux400_ftdic	examples/ux400rss.c	/^struct ftdi_context ux400_ftdic;$/;"	v	typeref
 ux400_ftdic	examples/ux400updatepower.c	/^struct ftdi_context ux400_ftdic;$/;"	v	typeref:struct:ftdi_context
 ux400_ftdic	examples/ux400upower.c	/^struct ftdi_context ux400_ftdic;$/;"	v	typeref:struct:ftdi_context
 ux400_ftdic	examples/ux400vfl.c	/^struct ftdi_context ux400_ftdic;$/;"	v	typeref:struct:ftdi_context
-ux400_gps_ftdic	examples/simple.c	/^struct ftdi_context ux400_gps_ftdic;$/;"	v	typeref:struct:ftdi_context
+ux400_gps_ftdic	examples/backup_simple.c	/^struct ftdi_context ux400_gps_ftdic;$/;"	v	typeref:struct:ftdi_context
 ux400_gps_ftdic	examples/ux400gps.c	/^struct ftdi_context ux400_gps_ftdic;$/;"	v	typeref:struct:ftdi_context
-ux400_gps_read_data	examples/simple.c	/^static int ux400_gps_read_data(unsigned char * buf, int size)$/;"	f	file:
+ux400_gps_read_data	examples/backup_simple.c	/^static int ux400_gps_read_data(unsigned char * buf, int size)$/;"	f	file:
 ux400_gps_read_data	examples/ux400gps.c	/^static int ux400_gps_read_data(unsigned char * buf, int size)$/;"	f	file:
-ux400_gps_sys_exit	examples/simple.c	/^static void ux400_gps_sys_exit()$/;"	f	file:
+ux400_gps_sys_exit	examples/backup_simple.c	/^static void ux400_gps_sys_exit()$/;"	f	file:
 ux400_gps_sys_exit	examples/ux400gps.c	/^static void ux400_gps_sys_exit()$/;"	f	file:
-ux400_gps_sys_init	examples/simple.c	/^static int ux400_gps_sys_init()$/;"	f	file:
+ux400_gps_sys_init	examples/backup_simple.c	/^static int ux400_gps_sys_init()$/;"	f	file:
 ux400_gps_sys_init	examples/ux400gps.c	/^static int ux400_gps_sys_init()$/;"	f	file:
-ux400_gps_write_data	examples/simple.c	/^static int ux400_gps_write_data(unsigned char * buf, int size)$/;"	f	file:
+ux400_gps_write_data	examples/backup_simple.c	/^static int ux400_gps_write_data(unsigned char * buf, int size)$/;"	f	file:
 ux400_gps_write_data	examples/ux400gps.c	/^static int ux400_gps_write_data(unsigned char * buf, int size)$/;"	f	file:
 ux400_opm_ftdic	examples/ux400opmtest.c	/^struct ftdi_context ux400_opm_ftdic;$/;"	v	typeref:struct:ftdi_context
 ux400_opm_read_data	examples/ux400opmtest.c	/^static int ux400_opm_read_data(unsigned char * buf, int size)$/;"	f	file:

@@ -22,43 +22,12 @@
 #define	UX400VENDOR	0x0403
 #define	UX400PRODUCT	0x6010
 #define	UX400DES	"USB <-> Serial Converter"
+#define	UX400_LOCAL_SN		"USBLOCALBUS01"
+#define	UX400_SEM_CPLD	"UX400_SEM_CPLD"
 
 #define BUF_SIZE 0x10
-
-#define MAX_DEVICES		5
-#define TEST_BUFFER		32
-
-#define INIT_CYCLE              50
-
-#define	FAN_SLEEP		20
-
-//#define	FAN_TEST		1
-//#define	POWERKEY_TEST		1
-//#define	KEYS_TEST		1
-#define	BACKLIGHT_TEST	1
-
-//#define		VFL_TEST	1
-//#define		OPM_TEST	1
-
-//#define		MODGPIO_TEST	1
-
-#ifdef VFL_TEST
-        #define VFL_ON          1
-        #define VFL_OFF         0
-        #define VFL_BLINK       1
-	#define	VFL_STABLE	0
-#endif
-
-#ifdef OPM_TEST
-	#define	OPM_ON		1
-	#define	OPM_OFF		0
-#endif
-
 #define	POWERKEY		0x01
-
 #define	BUZZER_DELAY		250000
-
-#define	UX400_LOCAL_SN		"USBLOCALBUS01"
 
 #define	BACKLIGHT_OFFSET	0x01
 #define	POWERKEY_OFFSET		0x08
@@ -74,9 +43,6 @@
 #define	VEEX_KEY_FILE		0x19
 #define	VEEX_KEY_HISTORY	0x15
 
-#define	UX400_SEM_CPLD	"UX400_SEM_CPLD"
-
-
 struct ftdi_context ux400_ftdic;
 
 int Read_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len);
@@ -87,7 +53,6 @@ int buzzer(int on);
 int fancontrol(unsigned char fandata);
 int sys_init();
 int powercut(void);
-
 
 int uinput_fd;
 
@@ -249,76 +214,6 @@ int backlight(unsigned char data)
 
 	return 0;
 }
-
-#ifdef VFL_TEST
-int vfl_pwr(unsigned int on, unsigned int blink)
-{
-	unsigned char data, temp = 0;
-	int ret;
-
-	if((ret = Read_bus(&ux400_ftdic, 0x00, REG1_OFFSET, &data, 1)) < 0)
-	{
-		printf("Read VFL reg failed.\n");
-
-		return -1;
-	}
-
-	if( on == VFL_ON){
-		data |= 0x08;
-		if(blink == VFL_BLINK){
-			data |= 0x10;
-		}else{
-			data &= (~0x10);
-		}
-	}else{
-		data &= (~0x08);
-	}
-
-//	data &= (~0x02);
-//	data &= (~0x04);
-
-	if((ret = Write_bus(&ux400_ftdic, 0x00, REG1_OFFSET, &data, 1)) < 0){
-		printf("Write VFL reg failed.\n");
-		return -1;
-	}
-
-	return 0;
-}
-
-#endif
-
-#ifdef OPM_TEST
-
-int opm_pwr(unsigned int on)
-{
-
-	unsigned char data, temp;
-	int ret;
-
-	if((ret = Read_bus(&ux400_ftdic, 0x00, REG1_OFFSET, &data, 1)) < 0)
-	{
-		printf("Read OPM reg failed!\n");
-		return -1;
-	}
-
-	if(on == 1){
-		data |= 0x20;
-	}else{
-		data &= ~(0x20);
-	}
-
-//	data &= (~0x02);
-
-	if((ret = Write_bus(&ux400_ftdic, 0x00, REG1_OFFSET, &data, 1)) < 0)
-	{
-		printf("Write OPM reg failed!\n");
-		return -1;
-	}
-	
-	return 0;
-}
-
-#endif
 
 int gpio_set(unsigned char gpio)
 {	
@@ -617,59 +512,18 @@ int main(int argc, char *argv[] )
 	unsigned char fan = 0;
 	char temp = 0;
 	int ret = 0;
-
-#if 0
-	if((ret = sys_init())<0)
-	{
-		printf("LIBFTDI init failed, exit\n");
-		exit(1);
-	}
-#endif
-
-#ifdef FAN_TEST
-	fan = 0x33;
-
-	fancontrol(fan);
-
-	sleep(FAN_SLEEP);
-
-	fan = 0x22;
-
-	fancontrol(fan);
-	sleep(FAN_SLEEP);
-
-	fan = 0x11;
-
-	fancontrol(fan);
-	sleep(FAN_SLEEP);
-
-	fan = 0x00;
-
-	fancontrol(fan);
-#endif
-
-#ifdef POWERKEY_TEST
-
-	for(;;){
-		powerkey();
-		usleep(100000);
-	}
-
-#endif
-
-#ifdef KEYS_TEST
-	uinput_init();
-	keys();
-#endif
-
-#ifdef BACKLIGHT_TEST
-
 	int data = 0;
 	sem_t * sem_id;
 
 	if(argc != 2){
 		printf("usage: ux400bl pwm_value\n");
 		exit(0);
+	}
+
+	if((ret = sys_init())<0)
+	{
+		printf("LIBFTDI init failed, exit\n");
+		exit(1);
 	}
 
 	data = atoi(argv[1]);
@@ -690,69 +544,11 @@ int main(int argc, char *argv[] )
 		exit(1);
 	}
 
-	if((ret = sys_init())<0)
-	{
-		printf("LIBFTDI init failed, exit\n");
-		if(sem_post(sem_id) < 0) {
-			perror("UX400 backlight sem_post");
-		}
-		exit(1);
-	}
-
 	backlight(data);
 
 	if(sem_post(sem_id) < 0) {
 		perror("UX400 backlight sem_post");
 	}
-	
-#endif
-
-#ifdef VFL_TEST
-
-	if(argc != 3){
-		printf("usage: ux400-vfl power blink\n");
-		exit(0);
-	}
-
-	if(atoi(argv[1]) == 0){
-		vfl_pwr(1, 0);
-	}
-
-	vfl_pwr(atoi(argv[1]), atoi(argv[2]));
-
-#if 0
-	for(;;){
-		vfl_pwr(VFL_ON, VFL_BLINK);
-		sleep(5);
-		vfl_pwr(VFL_ON, VFL_STABLE);
-		sleep(5);
-		vfl_pwr(VFL_OFF, VFL_BLINK);
-		sleep(5);
-	}
-#endif
-
-#endif
-
-#ifdef	OPM_TEST
-
-	for(;;){
-		opm_pwr(OPM_ON);
-		sleep(5);
-		opm_pwr(OPM_OFF);
-		sleep(5);
-	}
-
-#endif
-
-#ifdef MODGPIO_TEST
-	for(;;){
-		gpio_set(0xFF);
-		sleep(2);
-		gpio_set(0x00);
-		sleep(2);
-	}
-#endif
-
 }
 
 
