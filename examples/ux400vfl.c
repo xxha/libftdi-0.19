@@ -32,27 +32,10 @@
 
 #define	FAN_SLEEP		20
 
-//#define	FAN_TEST		1
-//#define	POWERKEY_TEST		1
-//#define	KEYS_TEST		1
-//#define	BACKLIGHT_TEST	1
-
-#define		VFL_TEST	1
-//#define		OPM_TEST	1
-
-//#define		MODGPIO_TEST	1
-
-#ifdef VFL_TEST
-        #define VFL_ON          1
-        #define VFL_OFF         0
-        #define VFL_BLINK       1
-	#define	VFL_STABLE	0
-#endif
-
-#ifdef OPM_TEST
-	#define	OPM_ON		1
-	#define	OPM_OFF		0
-#endif
+#define VFL_ON          1
+#define VFL_OFF         0
+#define VFL_BLINK       1
+#define	VFL_STABLE	0
 
 #define	POWERKEY		0x01
 
@@ -250,7 +233,6 @@ int backlight(unsigned char data)
 	return 0;
 }
 
-#ifdef VFL_TEST
 int vfl_pwr(unsigned int on, unsigned int blink)
 {
 	unsigned char data, temp = 0;
@@ -284,41 +266,6 @@ int vfl_pwr(unsigned int on, unsigned int blink)
 
 	return 0;
 }
-
-#endif
-
-#ifdef OPM_TEST
-
-int opm_pwr(unsigned int on)
-{
-
-	unsigned char data, temp;
-	int ret;
-
-	if((ret = Read_bus(&ux400_ftdic, 0x00, REG1_OFFSET, &data, 1)) < 0)
-	{
-		printf("Read OPM reg failed!\n");
-		return -1;
-	}
-
-	if(on == 1){
-		data |= 0x20;
-	}else{
-		data &= ~(0x20);
-	}
-
-//	data &= (~0x02);
-
-	if((ret = Write_bus(&ux400_ftdic, 0x00, REG1_OFFSET, &data, 1)) < 0)
-	{
-		printf("Write OPM reg failed!\n");
-		return -1;
-	}
-	
-	return 0;
-}
-
-#endif
 
 int gpio_set(unsigned char gpio)
 {	
@@ -619,61 +566,18 @@ int main(int argc, char *argv[] )
 	int ret = 0;
 	sem_t * sem_id;
 
-#ifdef FAN_TEST
-	fan = 0x33;
-
-	fancontrol(fan);
-
-	sleep(FAN_SLEEP);
-
-	fan = 0x22;
-
-	fancontrol(fan);
-	sleep(FAN_SLEEP);
-
-	fan = 0x11;
-
-	fancontrol(fan);
-	sleep(FAN_SLEEP);
-
-	fan = 0x00;
-
-	fancontrol(fan);
-#endif
-
-#ifdef POWERKEY_TEST
-
-	for(;;){
-		powerkey();
-		usleep(100000);
-	}
-
-#endif
-
-#ifdef KEYS_TEST
-	uinput_init();
-	keys();
-#endif
-
-#ifdef BACKLIGHT_TEST
-
-	int i = 0;
-
-	printf("UX400 backlight controll...\n");
-	for(i = 0x3F; i > 0; i --){
-		printf("i = %d\n", i);
-		backlight(i);
-		sleep(1);
-	}
-	printf("done!\n");
-#endif
-
-#ifdef VFL_TEST
 
 	if(argc != 3){
 		printf("usage: ux400-vfl power blink\n");
 		exit(0);
 	}
+
+	if((ret = sys_init())<0)
+	{
+		printf("LIBFTDI init failed, exit\n");
+		exit(1);
+	}
+
 
 	sem_id = sem_open(UX400_SEM_CPLD, O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH, 1);
 	if(sem_id == SEM_FAILED) {
@@ -686,15 +590,6 @@ int main(int argc, char *argv[] )
 		exit(1);
 	}
 
-	if((ret = sys_init())<0)
-	{
-		printf("LIBFTDI init failed, exit\n");
-		if(sem_post(sem_id) < 0) {
-			perror("UX400 VFL sem_post");
-		}
-		exit(1);
-	}
-
 	if(atoi(argv[1]) == 0){
 		vfl_pwr(1, 0);
 	}
@@ -704,40 +599,6 @@ int main(int argc, char *argv[] )
 	if(sem_post(sem_id) < 0) {
 		perror("UX400 VFL sem_post");
 	}
-
-#if 0
-	for(;;){
-		vfl_pwr(VFL_ON, VFL_BLINK);
-		sleep(5);
-		vfl_pwr(VFL_ON, VFL_STABLE);
-		sleep(5);
-		vfl_pwr(VFL_OFF, VFL_BLINK);
-		sleep(5);
-	}
-#endif
-
-#endif
-
-#ifdef	OPM_TEST
-
-	for(;;){
-		opm_pwr(OPM_ON);
-		sleep(5);
-		opm_pwr(OPM_OFF);
-		sleep(5);
-	}
-
-#endif
-
-#ifdef MODGPIO_TEST
-	for(;;){
-		gpio_set(0xFF);
-		sleep(2);
-		gpio_set(0x00);
-		sleep(2);
-	}
-#endif
-
 }
 
 

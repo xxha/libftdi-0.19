@@ -230,6 +230,11 @@ int main(int argc, char *argv[] )
 		exit(0);
 	}
 
+	if((ret = sys_init())<0)
+	{
+		printf("LIBFTDI init failed, exit\n");
+	}
+
 	sem_id = sem_open(UX400_SEM_CPLD, O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH, 1);
 	if(sem_id == SEM_FAILED) {
 		perror("UX400 CPLD sem_open");
@@ -238,15 +243,6 @@ int main(int argc, char *argv[] )
 
 	if(sem_wait(sem_id) < 0) {
 		perror("UX400 CPLD sem_wait");
-		exit(1);
-	}
-
-	if((ret = sys_init())<0)
-	{
-		printf("LIBFTDI init failed, exit\n");
-		if(sem_post(sem_id) < 0) {
-			perror("UX400 CPLD sem_post");
-		}
 		exit(1);
 	}
 
