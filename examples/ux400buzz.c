@@ -239,6 +239,12 @@ int main(int argc, char *argv[] )
 		exit(0);
 	}
 
+	if((ret = sys_init()) < 0 )
+	{
+		printf("LIBFTDI init failed, exit\n");
+		exit(1);
+	}
+
 	data = atoi(argv[1]);
 
 	if(data >= 1) data = 1;
@@ -252,15 +258,6 @@ int main(int argc, char *argv[] )
 
 	if(sem_wait(sem_id) < 0) {
 		perror("UX400 buzzer sem_wait");
-		exit(1);
-	}
-
-	if((ret = sys_init()) < 0 )
-	{
-		printf("LIBFTDI init failed, exit\n");
-		if(sem_post(sem_id) < 0) {
-			perror("UX400 buzzer sem_post");
-		}
 		exit(1);
 	}
 
