@@ -12,29 +12,33 @@
 #include <fcntl.h>
 #include <linux/input.h>
 #include <linux/uinput.h>
-#include <semaphore.h>
+
 #include <ftdi.h>
 
-#define UX400_SEM_CPLD  "UX400_SEM_CPLD"
+#include <sys/wait.h>
+#include <sys/stat.h>        /* For mode constants */
+#include <semaphore.h>
+
 #define	UX400VENDOR	0x0403
 #define	UX400PRODUCT	0x6010
 #define	UX400DES	"USB <-> Serial Converter"
 
-#define BUF_SIZE 0x10
+#define	OPM_ON		1
+#define	OPM_OFF		0
 
-#define MAX_DEVICES		5
-#define TEST_BUFFER		32
-
-#define INIT_CYCLE              50
-
-#define	FAN_SLEEP		20
-
-//#define		MODGPIO_TEST	1
 
 #define	UX400_LOCAL_SN		"USBLOCALBUS01"
 
+#define	BACKLIGHT_OFFSET	0x01
+#define	POWERKEY_OFFSET		0x08
+#define	KEYOFFSET		0x0A
+
+#define	REG1_OFFSET		0x00
 #define	REG_GPIO_OFFSET		0x03
 #define	REG_CPLDVER		0x15
+
+#define	UX400_SEM_CPLD	"UX400_SEM_CPLD"
+
 
 
 struct ftdi_context ux400_ftdic;
@@ -45,29 +49,47 @@ int Write_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char l
 int sys_init();
 
 
-int gpio_set(unsigned char gpio)
-{	
+char cpldver(void)
+{
+	unsigned char data;
 	int ret = 0;
 
-        if(( ret = Write_bus(&ux400_ftdic, 0x00, REG_GPIO_OFFSET, &gpio, 1)) < 0)
+	if((ret = Read_bus(&ux400_ftdic, 0x00, REG_CPLDVER, &data, 1) < 0))
 	{
-		printf("Write GPIO reg failed!\n");
+		printf("Read CPLD version failed.\n");
 		return -1;
+	}else{
+		//printf("CPLD VERSION: 0x%x\n", data);
 	}
 
-	return 0;
+	return data;
 }
 
-int gpio_get(unsigned char * gpio)
-{	
-	int ret = 0;
 
-        if(( ret = Read_bus(&ux400_ftdic, 0x00, REG_GPIO_OFFSET, gpio, 1)) < 0)
+int opm_pwr(unsigned int on)
+{
+
+	unsigned char data, temp;
+	int ret;
+
+	if((ret = Read_bus(&ux400_ftdic, 0x00, REG1_OFFSET, &data, 1)) < 0)
 	{
-		printf("Read GPIO reg failed!\n");
+		printf("Read OPM reg failed!\n");
 		return -1;
 	}
 
+	if(on == 1){
+		data |= 0x20;
+	}else{
+		data &= ~(0x20);
+	}
+
+	if((ret = Write_bus(&ux400_ftdic, 0x00, REG1_OFFSET, &data, 1)) < 0)
+	{
+		printf("Write OPM reg failed!\n");
+		return -1;
+	}
+	
 	return 0;
 }
 
@@ -177,7 +199,7 @@ int sys_init()
 	ftdi_list_free(&devlist);
 #endif
 
-	if((ret = ftdi_usb_open_desc(&ux400_ftdic, UX400VENDOR, UX400PRODUCT, NULL, UX400_LOCAL_SN)) < 0)
+	if((ret = ftdi_usb_open_desc(&ux400_ftdic, UX400VENDOR, UX400PRODUCT, UX400DES, UX400_LOCAL_SN)) < 0)
 	{
 	    fprintf(stderr, "ftdi_usb_open_desc failed: %d (%s)\n", ret, ftdi_get_error_string(&ux400_ftdic));
 	    return EXIT_FAILURE;
@@ -216,83 +238,47 @@ int sys_init()
 int main(int argc, char *argv[] )
 {
 	unsigned char fan = 0;
-	unsigned char temp = 0;
-	unsigned char power = 0;
+	char temp = 0;
 	int ret = 0;
-	int onoff = 0;
 	sem_t * sem_id;
 
-	if(argc != 3){
-		printf("usage: ux400gpio slot 1/0\n");
-		printf("	 slot = LA/LB/LC/RA/RB/RC\n");
-		printf("	 1 = on, 0 = off\n");
+	if(argc != 2){
+		printf("usage: ux400opm 1/0\n");
 		exit(0);
 	}
 
-	if((ret = sys_init())<0){
+	if((ret = sys_init())<0)
+	{
 		printf("LIBFTDI init failed, exit\n");
+	}
+
+	temp = cpldver();
+	if(temp < 0 )
+	{
+		printf("Read CPLD version failed, exit\n");
 		exit(1);
 	}
 
-	onoff = atoi(argv[2]);
+	sem_id = sem_open(UX400_SEM_CPLD, O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH, 1);
+	if(sem_id == SEM_FAILED) {
+		perror("UX400 OPM sem_open");
+		exit(1);
+	}
 
-	if( strcmp(argv[1], "LA") == 0){
-		power = 0x04;
-	}else if( strcmp(argv[1], "LB") == 0){
-		power = 0x02;
-	}else if( strcmp(argv[1], "LC") == 0){
-		power = 0x01;
-	}else if( strcmp(argv[1], "RA") == 0){
-		power = 0x10;
-	}else if( strcmp(argv[1], "RB") == 0){
-		power = 0x08;
-	}else if( strcmp(argv[1], "RC") == 0){
-		power = 0x20;
+	if(sem_wait(sem_id) < 0) {
+		perror("UX400 OPM sem_wait");
+		exit(1);
+	}
+
+	if(atoi(argv[1]) == 1){
+		opm_pwr(OPM_ON);
 	}else{
-		printf("Unknow slot, usage: ux400gpio LA/LB/LC/RA/RB/RC 1/0\n", temp);
-		exit(0);
+		opm_pwr(OPM_OFF);
 	}
 
-        sem_id = sem_open(UX400_SEM_CPLD, O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH, 1);
-        if(sem_id == SEM_FAILED) {
-                perror("UX400 buzzer sem_open");
-                exit(1);
-        }
-
-        if(sem_wait(sem_id) < 0) {
-                perror("UX400 buzzer sem_wait");
-                exit(1);
-        }
-
-	if((ret = gpio_get(&temp))<0){
-		printf("Read gpio failed, exit\n");
-		exit(1);
+	if(sem_post(sem_id) < 0) {
+		perror("UX400 OPM sem_post");
 	}
-
-        if(sem_post(sem_id) < 0) {
-                perror("UX400 buzzer sem_post");
-        }
-
-	if(onoff == 0){
-		temp &= ~power;
-	}else{
-		temp |= power;
-	}
-
-//	printf("GPIO write: 0x%x, onoff: %d, power: 0x%x\n", temp, onoff, power);
-        if(sem_wait(sem_id) < 0) {
-                perror("UX400 buzzer sem_wait");
-                exit(1);
-        }
-
-	if((ret = gpio_set(temp))<0){
-		printf("Read gpio failed, exit\n");
-		exit(1);
-	}
-
-        if(sem_post(sem_id) < 0) {
-                perror("UX400 buzzer sem_post");
-        }
 
 	ftdi_usb_close(&ux400_ftdic);
 	ftdi_deinit(&ux400_ftdic);

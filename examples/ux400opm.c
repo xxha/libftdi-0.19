@@ -59,7 +59,7 @@ char cpldver(void)
 		printf("Read CPLD version failed.\n");
 		return -1;
 	}else{
-		printf("CPLD VERSION: 0x%x\n", data);
+		//printf("CPLD VERSION: 0x%x\n", data);
 	}
 
 	return data;
@@ -247,6 +247,18 @@ int main(int argc, char *argv[] )
 		exit(0);
 	}
 
+	if((ret = sys_init())<0)
+	{
+		printf("LIBFTDI init failed, exit\n");
+	}
+
+	temp = cpldver();
+	if(temp < 0 )
+	{
+		printf("Read CPLD version failed, exit\n");
+		exit(1);
+	}
+
 	sem_id = sem_open(UX400_SEM_CPLD, O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH, 1);
 	if(sem_id == SEM_FAILED) {
 		perror("UX400 OPM sem_open");
@@ -255,25 +267,6 @@ int main(int argc, char *argv[] )
 
 	if(sem_wait(sem_id) < 0) {
 		perror("UX400 OPM sem_wait");
-		exit(1);
-	}
-
-	if((ret = sys_init())<0)
-	{
-		printf("LIBFTDI init failed, exit\n");
-		if(sem_post(sem_id) < 0) {
-			perror("UX400 OPM sem_post");
-		}
-		exit(1);
-	}
-
-	temp = cpldver();
-	if(temp < 0 )
-	{
-		printf("Read CPLD version failed, exit\n");
-		if(sem_post(sem_id) < 0) {
-			perror("UX400 OPM sem_post");
-		}
 		exit(1);
 	}
 
