@@ -223,7 +223,9 @@ int main(int argc, char *argv[] )
 	sem_t * sem_id;
 
 	if(argc != 3){
-		printf("usage: ux400mods slot on/off\n");
+		printf("usage: ux400gpio slot 1/0\n");
+		printf("	 slot = LA/LB/LC/RA/RB/RC\n");
+		printf("	 1 = on, 0 = off\n");
 		exit(0);
 	}
 
