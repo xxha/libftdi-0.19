@@ -59,10 +59,10 @@ AWK	examples/Makefile	/^AWK = gawk$/;"	m
 AWK	src/Makefile	/^AWK = gawk$/;"	m
 BACKLIGHT_OFFSET	examples/main.c	60;"	d	file:
 BACKLIGHT_OFFSET	examples/sdupfail.c	32;"	d	file:
-BACKLIGHT_OFFSET	examples/simple.c	32;"	d	file:
+BACKLIGHT_OFFSET	examples/simple.c	46;"	d	file:
 BACKLIGHT_OFFSET	examples/testopm.c	29;"	d	file:
 BACKLIGHT_OFFSET	examples/ux40040gsn.c	63;"	d	file:
-BACKLIGHT_OFFSET	examples/ux400bl.c	63;"	d	file:
+BACKLIGHT_OFFSET	examples/ux400bl.c	32;"	d	file:
 BACKLIGHT_OFFSET	examples/ux400bootkey.c	38;"	d	file:
 BACKLIGHT_OFFSET	examples/ux400buzz.c	63;"	d	file:
 BACKLIGHT_OFFSET	examples/ux400clocks.c	32;"	d	file:
@@ -76,8 +76,7 @@ BACKLIGHT_OFFSET	examples/ux400poweroff.c	63;"	d	file:
 BACKLIGHT_OFFSET	examples/ux400rss.c	32;"	d	file:
 BACKLIGHT_OFFSET	examples/ux400updatepower.c	63;"	d	file:
 BACKLIGHT_OFFSET	examples/ux400upower.c	61;"	d	file:
-BACKLIGHT_OFFSET	examples/ux400vfl.c	63;"	d	file:
-BACKLIGHT_TEST	examples/ux400bl.c	38;"	d	file:
+BACKLIGHT_OFFSET	examples/ux400vfl.c	46;"	d	file:
 BITMODE_BITBANG	src/ftdi.h	/^    BITMODE_BITBANG= 0x01,    \/**< classical asynchronous bitbang mode, introduced with B-type chips *\/$/;"	e	enum:ftdi_mpsse_mode
 BITMODE_CBUS	src/ftdi.h	/^    BITMODE_CBUS   = 0x20,    \/**< Bitbang on CBUS pins of R-type chips, configure in EEPROM before *\/$/;"	e	enum:ftdi_mpsse_mode
 BITMODE_MCU	src/ftdi.h	/^    BITMODE_MCU    = 0x08,    \/**< MCU Host Bus Emulation mode, available on 2232x chips *\/$/;"	e	enum:ftdi_mpsse_mode
@@ -107,7 +106,7 @@ BUF_SIZE	examples/main.c	23;"	d	file:
 BUF_SIZE	examples/sdupfail.c	26;"	d	file:
 BUF_SIZE	examples/simple.c	26;"	d	file:
 BUF_SIZE	examples/ux40040gsn.c	26;"	d	file:
-BUF_SIZE	examples/ux400bl.c	26;"	d	file:
+BUF_SIZE	examples/ux400bl.c	28;"	d	file:
 BUF_SIZE	examples/ux400bootkey.c	26;"	d	file:
 BUF_SIZE	examples/ux400buzz.c	26;"	d	file:
 BUF_SIZE	examples/ux400cpld.c	26;"	d	file:
@@ -121,9 +120,9 @@ BUF_SIZE	examples/ux400upower.c	24;"	d	file:
 BUF_SIZE	examples/ux400vfl.c	26;"	d	file:
 BUZZER_DELAY	examples/main.c	56;"	d	file:
 BUZZER_DELAY	examples/sdupfail.c	31;"	d	file:
-BUZZER_DELAY	examples/simple.c	31;"	d	file:
+BUZZER_DELAY	examples/simple.c	42;"	d	file:
 BUZZER_DELAY	examples/ux40040gsn.c	59;"	d	file:
-BUZZER_DELAY	examples/ux400bl.c	59;"	d	file:
+BUZZER_DELAY	examples/ux400bl.c	30;"	d	file:
 BUZZER_DELAY	examples/ux400bootkey.c	34;"	d	file:
 BUZZER_DELAY	examples/ux400buzz.c	59;"	d	file:
 BUZZER_DELAY	examples/ux400cpld.c	59;"	d	file:
@@ -132,7 +131,7 @@ BUZZER_DELAY	examples/ux400keys.c	61;"	d	file:
 BUZZER_DELAY	examples/ux400poweroff.c	59;"	d	file:
 BUZZER_DELAY	examples/ux400updatepower.c	59;"	d	file:
 BUZZER_DELAY	examples/ux400upower.c	57;"	d	file:
-BUZZER_DELAY	examples/ux400vfl.c	59;"	d	file:
+BUZZER_DELAY	examples/ux400vfl.c	42;"	d	file:
 CBUS_BB_RD	src/ftdi.h	268;"	d
 CBUS_BB_WR	src/ftdi.h	266;"	d
 CBUS_CLK12	src/ftdi.h	260;"	d
@@ -360,8 +359,8 @@ EXTRA_DIST	src/Makefile	/^EXTRA_DIST = CMakeLists.txt$/;"	m
 Eeprom	ftdipp/ftdi.cpp	/^Eeprom::Eeprom(Context* parent)$/;"	f	class:Ftdi::Eeprom
 Eeprom	ftdipp/ftdi.hpp	/^class Eeprom$/;"	c	namespace:Ftdi
 FAN_SLEEP	examples/main.c	30;"	d	file:
+FAN_SLEEP	examples/simple.c	33;"	d	file:
 FAN_SLEEP	examples/ux40040gsn.c	33;"	d	file:
-FAN_SLEEP	examples/ux400bl.c	33;"	d	file:
 FAN_SLEEP	examples/ux400buzz.c	33;"	d	file:
 FAN_SLEEP	examples/ux400cpld.c	33;"	d	file:
 FAN_SLEEP	examples/ux400fanoff.c	33;"	d	file:
@@ -426,8 +425,8 @@ HEADERS	src/Makefile	/^HEADERS = $(include_HEADERS)$/;"	m
 HIGH_CURRENT_DRIVE	src/ftdi.h	289;"	d
 INCLUDES	examples/Makefile	/^INCLUDES = -I$(top_srcdir)\/src -I$(top_srcdir)\/ftdipp$/;"	m
 INIT_CYCLE	examples/main.c	28;"	d	file:
+INIT_CYCLE	examples/simple.c	31;"	d	file:
 INIT_CYCLE	examples/ux40040gsn.c	31;"	d	file:
-INIT_CYCLE	examples/ux400bl.c	31;"	d	file:
 INIT_CYCLE	examples/ux400buzz.c	31;"	d	file:
 INIT_CYCLE	examples/ux400cpld.c	31;"	d	file:
 INIT_CYCLE	examples/ux400fanoff.c	31;"	d	file:
@@ -490,10 +489,10 @@ INVERT_TXD	src/ftdi.h	272;"	d
 Input	ftdipp/ftdi.hpp	/^        Input,$/;"	e	enum:Ftdi::Context::Direction
 KEYOFFSET	examples/main.c	62;"	d	file:
 KEYOFFSET	examples/sdupfail.c	34;"	d	file:
-KEYOFFSET	examples/simple.c	34;"	d	file:
+KEYOFFSET	examples/simple.c	48;"	d	file:
 KEYOFFSET	examples/testopm.c	31;"	d	file:
 KEYOFFSET	examples/ux40040gsn.c	65;"	d	file:
-KEYOFFSET	examples/ux400bl.c	65;"	d	file:
+KEYOFFSET	examples/ux400bl.c	34;"	d	file:
 KEYOFFSET	examples/ux400bootkey.c	40;"	d	file:
 KEYOFFSET	examples/ux400buzz.c	65;"	d	file:
 KEYOFFSET	examples/ux400clocks.c	34;"	d	file:
@@ -507,14 +506,13 @@ KEYOFFSET	examples/ux400poweroff.c	65;"	d	file:
 KEYOFFSET	examples/ux400rss.c	34;"	d	file:
 KEYOFFSET	examples/ux400updatepower.c	65;"	d	file:
 KEYOFFSET	examples/ux400upower.c	63;"	d	file:
-KEYOFFSET	examples/ux400vfl.c	65;"	d	file:
+KEYOFFSET	examples/ux400vfl.c	48;"	d	file:
 KEYS_TEST	examples/ux400cpld.c	37;"	d	file:
 KEYS_TEST	examples/ux400fanoff.c	37;"	d	file:
 KEYS_TEST	examples/ux400keys.c	39;"	d	file:
 KEYS_TEST	examples/ux400updatepower.c	37;"	d	file:
 KEYS_TEST	examples/ux400upower.c	35;"	d	file:
 KEY_INTERVAL	examples/sdupfail.c	35;"	d	file:
-KEY_INTERVAL	examples/simple.c	35;"	d	file:
 KEY_INTERVAL	examples/ux400keys.c	82;"	d	file:
 LD	Makefile	/^LD = \/usr\/bin\/ld$/;"	m
 LD	bindings/Makefile	/^LD = \/usr\/bin\/ld$/;"	m
@@ -598,8 +596,8 @@ MAKEINFO	src/Makefile	/^MAKEINFO = ${SHELL} \/home\/v400\/libftdi-0.19\/missing 
 MANUALS	doc/Makefile	/^MANUALS = html\/index.html$/;"	m
 MARK	src/ftdi.h	/^enum ftdi_parity_type { NONE=0, ODD=1, EVEN=2, MARK=3, SPACE=4 };$/;"	e	enum:ftdi_parity_type
 MAX_DEVICES	examples/main.c	25;"	d	file:
+MAX_DEVICES	examples/simple.c	28;"	d	file:
 MAX_DEVICES	examples/ux40040gsn.c	28;"	d	file:
-MAX_DEVICES	examples/ux400bl.c	28;"	d	file:
 MAX_DEVICES	examples/ux400bootkey.c	28;"	d	file:
 MAX_DEVICES	examples/ux400buzz.c	28;"	d	file:
 MAX_DEVICES	examples/ux400cpld.c	28;"	d	file:
@@ -668,7 +666,6 @@ OPM_BAUDRATE	examples/ux400opmtest.c	27;"	d	file:
 OPM_OFF	examples/main.c	51;"	d	file:
 OPM_OFF	examples/testopm.c	24;"	d	file:
 OPM_OFF	examples/ux40040gsn.c	54;"	d	file:
-OPM_OFF	examples/ux400bl.c	54;"	d	file:
 OPM_OFF	examples/ux400buzz.c	54;"	d	file:
 OPM_OFF	examples/ux400clocks.c	27;"	d	file:
 OPM_OFF	examples/ux400cpld.c	54;"	d	file:
@@ -681,11 +678,9 @@ OPM_OFF	examples/ux400poweroff.c	54;"	d	file:
 OPM_OFF	examples/ux400rss.c	27;"	d	file:
 OPM_OFF	examples/ux400updatepower.c	54;"	d	file:
 OPM_OFF	examples/ux400upower.c	52;"	d	file:
-OPM_OFF	examples/ux400vfl.c	54;"	d	file:
 OPM_ON	examples/main.c	50;"	d	file:
 OPM_ON	examples/testopm.c	23;"	d	file:
 OPM_ON	examples/ux40040gsn.c	53;"	d	file:
-OPM_ON	examples/ux400bl.c	53;"	d	file:
 OPM_ON	examples/ux400buzz.c	53;"	d	file:
 OPM_ON	examples/ux400clocks.c	26;"	d	file:
 OPM_ON	examples/ux400cpld.c	53;"	d	file:
@@ -698,7 +693,6 @@ OPM_ON	examples/ux400poweroff.c	53;"	d	file:
 OPM_ON	examples/ux400rss.c	26;"	d	file:
 OPM_ON	examples/ux400updatepower.c	53;"	d	file:
 OPM_ON	examples/ux400upower.c	51;"	d	file:
-OPM_ON	examples/ux400vfl.c	53;"	d	file:
 OPTION_OFFSET_FTDI	examples/ux400_ftdi_eeprom.c	26;"	d	file:
 OPTION_SIZE_FTDI	examples/ux400_ftdi_eeprom.c	27;"	d	file:
 OTOOL	Makefile	/^OTOOL = $/;"	m
@@ -783,9 +777,9 @@ POST_UNINSTALL	examples/Makefile	/^POST_UNINSTALL = :$/;"	m
 POST_UNINSTALL	src/Makefile	/^POST_UNINSTALL = :$/;"	m
 POWERKEY	examples/main.c	54;"	d	file:
 POWERKEY	examples/sdupfail.c	30;"	d	file:
-POWERKEY	examples/simple.c	30;"	d	file:
+POWERKEY	examples/simple.c	40;"	d	file:
 POWERKEY	examples/ux40040gsn.c	57;"	d	file:
-POWERKEY	examples/ux400bl.c	57;"	d	file:
+POWERKEY	examples/ux400bl.c	29;"	d	file:
 POWERKEY	examples/ux400bootkey.c	32;"	d	file:
 POWERKEY	examples/ux400buzz.c	57;"	d	file:
 POWERKEY	examples/ux400cpld.c	57;"	d	file:
@@ -794,13 +788,13 @@ POWERKEY	examples/ux400keys.c	59;"	d	file:
 POWERKEY	examples/ux400poweroff.c	57;"	d	file:
 POWERKEY	examples/ux400updatepower.c	57;"	d	file:
 POWERKEY	examples/ux400upower.c	55;"	d	file:
-POWERKEY	examples/ux400vfl.c	57;"	d	file:
+POWERKEY	examples/ux400vfl.c	40;"	d	file:
 POWERKEY_OFFSET	examples/main.c	61;"	d	file:
 POWERKEY_OFFSET	examples/sdupfail.c	33;"	d	file:
-POWERKEY_OFFSET	examples/simple.c	33;"	d	file:
+POWERKEY_OFFSET	examples/simple.c	47;"	d	file:
 POWERKEY_OFFSET	examples/testopm.c	30;"	d	file:
 POWERKEY_OFFSET	examples/ux40040gsn.c	64;"	d	file:
-POWERKEY_OFFSET	examples/ux400bl.c	64;"	d	file:
+POWERKEY_OFFSET	examples/ux400bl.c	33;"	d	file:
 POWERKEY_OFFSET	examples/ux400bootkey.c	39;"	d	file:
 POWERKEY_OFFSET	examples/ux400buzz.c	64;"	d	file:
 POWERKEY_OFFSET	examples/ux400clocks.c	33;"	d	file:
@@ -814,9 +808,8 @@ POWERKEY_OFFSET	examples/ux400poweroff.c	64;"	d	file:
 POWERKEY_OFFSET	examples/ux400rss.c	33;"	d	file:
 POWERKEY_OFFSET	examples/ux400updatepower.c	64;"	d	file:
 POWERKEY_OFFSET	examples/ux400upower.c	62;"	d	file:
-POWERKEY_OFFSET	examples/ux400vfl.c	64;"	d	file:
+POWERKEY_OFFSET	examples/ux400vfl.c	47;"	d	file:
 POWERKEY_TEST	examples/sdupfail.c	28;"	d	file:
-POWERKEY_TEST	examples/simple.c	28;"	d	file:
 PRE_INSTALL	Makefile	/^PRE_INSTALL = :$/;"	m
 PRE_INSTALL	bindings/Makefile	/^PRE_INSTALL = :$/;"	m
 PRE_INSTALL	bindings/python/Makefile	/^PRE_INSTALL = :$/;"	m
@@ -880,10 +873,10 @@ RECURSIVE_TARGETS	Makefile	/^RECURSIVE_TARGETS = all-recursive check-recursive d
 RECURSIVE_TARGETS	bindings/Makefile	/^RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \\$/;"	m
 REG1_OFFSET	examples/main.c	64;"	d	file:
 REG1_OFFSET	examples/sdupfail.c	37;"	d	file:
-REG1_OFFSET	examples/simple.c	37;"	d	file:
+REG1_OFFSET	examples/simple.c	50;"	d	file:
 REG1_OFFSET	examples/testopm.c	33;"	d	file:
 REG1_OFFSET	examples/ux40040gsn.c	67;"	d	file:
-REG1_OFFSET	examples/ux400bl.c	67;"	d	file:
+REG1_OFFSET	examples/ux400bl.c	36;"	d	file:
 REG1_OFFSET	examples/ux400bootkey.c	42;"	d	file:
 REG1_OFFSET	examples/ux400buzz.c	67;"	d	file:
 REG1_OFFSET	examples/ux400clocks.c	36;"	d	file:
@@ -897,17 +890,17 @@ REG1_OFFSET	examples/ux400poweroff.c	67;"	d	file:
 REG1_OFFSET	examples/ux400rss.c	36;"	d	file:
 REG1_OFFSET	examples/ux400updatepower.c	67;"	d	file:
 REG1_OFFSET	examples/ux400upower.c	65;"	d	file:
-REG1_OFFSET	examples/ux400vfl.c	67;"	d	file:
+REG1_OFFSET	examples/ux400vfl.c	50;"	d	file:
 REG4_OFFSET	examples/ux400clocks.c	37;"	d	file:
 REG4_OFFSET	examples/ux400rss.c	37;"	d	file:
 REG5_OFFSET	examples/ux400clocks.c	38;"	d	file:
 REG_CPLDVER	examples/main.c	66;"	d	file:
 REG_CPLDVER	examples/sdupfail.c	39;"	d	file:
-REG_CPLDVER	examples/simple.c	39;"	d	file:
+REG_CPLDVER	examples/simple.c	52;"	d	file:
 REG_CPLDVER	examples/testopm.c	35;"	d	file:
 REG_CPLDVER	examples/ux40040gsn.c	69;"	d	file:
 REG_CPLDVER	examples/ux400_eeprom_read.c	27;"	d	file:
-REG_CPLDVER	examples/ux400bl.c	69;"	d	file:
+REG_CPLDVER	examples/ux400bl.c	38;"	d	file:
 REG_CPLDVER	examples/ux400bootkey.c	44;"	d	file:
 REG_CPLDVER	examples/ux400buzz.c	69;"	d	file:
 REG_CPLDVER	examples/ux400clocks.c	39;"	d	file:
@@ -923,13 +916,13 @@ REG_CPLDVER	examples/ux400poweroff.c	69;"	d	file:
 REG_CPLDVER	examples/ux400rss.c	38;"	d	file:
 REG_CPLDVER	examples/ux400updatepower.c	69;"	d	file:
 REG_CPLDVER	examples/ux400upower.c	67;"	d	file:
-REG_CPLDVER	examples/ux400vfl.c	69;"	d	file:
+REG_CPLDVER	examples/ux400vfl.c	52;"	d	file:
 REG_GPIO_OFFSET	examples/main.c	65;"	d	file:
 REG_GPIO_OFFSET	examples/sdupfail.c	38;"	d	file:
-REG_GPIO_OFFSET	examples/simple.c	38;"	d	file:
+REG_GPIO_OFFSET	examples/simple.c	51;"	d	file:
 REG_GPIO_OFFSET	examples/testopm.c	34;"	d	file:
 REG_GPIO_OFFSET	examples/ux40040gsn.c	68;"	d	file:
-REG_GPIO_OFFSET	examples/ux400bl.c	68;"	d	file:
+REG_GPIO_OFFSET	examples/ux400bl.c	37;"	d	file:
 REG_GPIO_OFFSET	examples/ux400bootkey.c	43;"	d	file:
 REG_GPIO_OFFSET	examples/ux400buzz.c	68;"	d	file:
 REG_GPIO_OFFSET	examples/ux400cpld.c	68;"	d	file:
@@ -943,7 +936,7 @@ REG_GPIO_OFFSET	examples/ux400opm.c	37;"	d	file:
 REG_GPIO_OFFSET	examples/ux400poweroff.c	68;"	d	file:
 REG_GPIO_OFFSET	examples/ux400updatepower.c	68;"	d	file:
 REG_GPIO_OFFSET	examples/ux400upower.c	66;"	d	file:
-REG_GPIO_OFFSET	examples/ux400vfl.c	68;"	d	file:
+REG_GPIO_OFFSET	examples/ux400vfl.c	51;"	d	file:
 Read_bus	examples/backup_simple.c	/^static int Read_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f	file:
 Read_bus	examples/main.c	/^int Read_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f
 Read_bus	examples/sdupfail.c	/^int Read_bus(struct ftdi_context * handle, unsigned char haddr, unsigned char laddr, unsigned char * buff, unsigned int len)$/;"	f
@@ -1056,8 +1049,8 @@ SWIG	examples/Makefile	/^SWIG = $/;"	m
 SWIG	src/Makefile	/^SWIG = $/;"	m
 TCK_DIVISOR	src/ftdi.h	86;"	d
 TEST_BUFFER	examples/main.c	26;"	d	file:
+TEST_BUFFER	examples/simple.c	29;"	d	file:
 TEST_BUFFER	examples/ux40040gsn.c	29;"	d	file:
-TEST_BUFFER	examples/ux400bl.c	29;"	d	file:
 TEST_BUFFER	examples/ux400bootkey.c	29;"	d	file:
 TEST_BUFFER	examples/ux400buzz.c	29;"	d	file:
 TEST_BUFFER	examples/ux400cpld.c	29;"	d	file:
@@ -1078,7 +1071,7 @@ TYPE_R	src/ftdi.h	/^enum ftdi_chip_type { TYPE_AM=0, TYPE_BM=1, TYPE_2232C=2, TY
 UX400DES	examples/backup_simple.c	19;"	d	file:
 UX400DES	examples/main.c	21;"	d	file:
 UX400DES	examples/sdupfail.c	22;"	d	file:
-UX400DES	examples/simple.c	22;"	d	file:
+UX400DES	examples/simple.c	24;"	d	file:
 UX400DES	examples/testopm.c	21;"	d	file:
 UX400DES	examples/ux40040gsn.c	24;"	d	file:
 UX400DES	examples/ux400_eeprom_40g.c	21;"	d	file:
@@ -1108,7 +1101,7 @@ UX400DES	examples/ux400vfl.c	24;"	d	file:
 UX400PRODUCT	examples/backup_simple.c	18;"	d	file:
 UX400PRODUCT	examples/main.c	20;"	d	file:
 UX400PRODUCT	examples/sdupfail.c	21;"	d	file:
-UX400PRODUCT	examples/simple.c	21;"	d	file:
+UX400PRODUCT	examples/simple.c	23;"	d	file:
 UX400PRODUCT	examples/testopm.c	20;"	d	file:
 UX400PRODUCT	examples/ux40040gsn.c	23;"	d	file:
 UX400PRODUCT	examples/ux400_eeprom_40g.c	20;"	d	file:
@@ -1139,7 +1132,7 @@ UX400PRODUCT	examples/ux400vfl.c	23;"	d	file:
 UX400VENDOR	examples/backup_simple.c	17;"	d	file:
 UX400VENDOR	examples/main.c	19;"	d	file:
 UX400VENDOR	examples/sdupfail.c	20;"	d	file:
-UX400VENDOR	examples/simple.c	20;"	d	file:
+UX400VENDOR	examples/simple.c	22;"	d	file:
 UX400VENDOR	examples/testopm.c	19;"	d	file:
 UX400VENDOR	examples/ux40040gsn.c	22;"	d	file:
 UX400VENDOR	examples/ux400_eeprom_40g.c	19;"	d	file:
@@ -1190,13 +1183,13 @@ UX400_LC_PATH	examples/bucheck.c	16;"	d	file:
 UX400_LC_PATH	examples/mtype.c	16;"	d	file:
 UX400_LOCAL_SN	examples/main.c	58;"	d	file:
 UX400_LOCAL_SN	examples/sdupfail.c	23;"	d	file:
-UX400_LOCAL_SN	examples/simple.c	23;"	d	file:
+UX400_LOCAL_SN	examples/simple.c	44;"	d	file:
 UX400_LOCAL_SN	examples/testopm.c	27;"	d	file:
 UX400_LOCAL_SN	examples/ux40040gsn.c	61;"	d	file:
 UX400_LOCAL_SN	examples/ux400_eeprom_40g.c	24;"	d	file:
 UX400_LOCAL_SN	examples/ux400_eeprom_read.c	24;"	d	file:
 UX400_LOCAL_SN	examples/ux400_eeprom_write.c	24;"	d	file:
-UX400_LOCAL_SN	examples/ux400bl.c	61;"	d	file:
+UX400_LOCAL_SN	examples/ux400bl.c	25;"	d	file:
 UX400_LOCAL_SN	examples/ux400bootkey.c	36;"	d	file:
 UX400_LOCAL_SN	examples/ux400buzz.c	61;"	d	file:
 UX400_LOCAL_SN	examples/ux400clocks.c	30;"	d	file:
@@ -1212,7 +1205,7 @@ UX400_LOCAL_SN	examples/ux400poweroff.c	61;"	d	file:
 UX400_LOCAL_SN	examples/ux400rss.c	30;"	d	file:
 UX400_LOCAL_SN	examples/ux400updatepower.c	61;"	d	file:
 UX400_LOCAL_SN	examples/ux400upower.c	59;"	d	file:
-UX400_LOCAL_SN	examples/ux400vfl.c	61;"	d	file:
+UX400_LOCAL_SN	examples/ux400vfl.c	44;"	d	file:
 UX400_RA_PATH	examples/bucheck.c	17;"	d	file:
 UX400_RA_PATH	examples/mtype.c	17;"	d	file:
 UX400_RB_PATH	examples/bucheck.c	18;"	d	file:
@@ -1238,27 +1231,28 @@ UX400_RS232_SN	examples/ux400aclockcal.c	22;"	d	file:
 UX400_RS232_SN	examples/ux400gps.c	22;"	d	file:
 UX400_RS232_SN	examples/ux400opmtest.c	22;"	d	file:
 UX400_SEM_CPLD	examples/sdupfail.c	24;"	d	file:
-UX400_SEM_CPLD	examples/simple.c	24;"	d	file:
+UX400_SEM_CPLD	examples/simple.c	60;"	d	file:
 UX400_SEM_CPLD	examples/ux40040gsn.c	77;"	d	file:
-UX400_SEM_CPLD	examples/ux400bl.c	77;"	d	file:
+UX400_SEM_CPLD	examples/ux400bl.c	26;"	d	file:
 UX400_SEM_CPLD	examples/ux400bootkey.c	52;"	d	file:
 UX400_SEM_CPLD	examples/ux400buzz.c	77;"	d	file:
 UX400_SEM_CPLD	examples/ux400clocks.c	41;"	d	file:
 UX400_SEM_CPLD	examples/ux400cpld.c	77;"	d	file:
 UX400_SEM_CPLD	examples/ux400cpldver.c	40;"	d	file:
 UX400_SEM_CPLD	examples/ux400fanoff.c	77;"	d	file:
+UX400_SEM_CPLD	examples/ux400gpio.c	18;"	d	file:
 UX400_SEM_CPLD	examples/ux400keys.c	79;"	d	file:
 UX400_SEM_CPLD	examples/ux400opm.c	40;"	d	file:
 UX400_SEM_CPLD	examples/ux400poweroff.c	77;"	d	file:
 UX400_SEM_CPLD	examples/ux400rss.c	40;"	d	file:
 UX400_SEM_CPLD	examples/ux400updatepower.c	77;"	d	file:
 UX400_SEM_CPLD	examples/ux400upower.c	75;"	d	file:
-UX400_SEM_CPLD	examples/ux400vfl.c	77;"	d	file:
+UX400_SEM_CPLD	examples/ux400vfl.c	60;"	d	file:
 VEEX_KEY_BACKLIGHT	examples/main.c	68;"	d	file:
 VEEX_KEY_BACKLIGHT	examples/sdupfail.c	41;"	d	file:
-VEEX_KEY_BACKLIGHT	examples/simple.c	41;"	d	file:
+VEEX_KEY_BACKLIGHT	examples/simple.c	54;"	d	file:
 VEEX_KEY_BACKLIGHT	examples/ux40040gsn.c	71;"	d	file:
-VEEX_KEY_BACKLIGHT	examples/ux400bl.c	71;"	d	file:
+VEEX_KEY_BACKLIGHT	examples/ux400bl.c	40;"	d	file:
 VEEX_KEY_BACKLIGHT	examples/ux400bootkey.c	46;"	d	file:
 VEEX_KEY_BACKLIGHT	examples/ux400buzz.c	71;"	d	file:
 VEEX_KEY_BACKLIGHT	examples/ux400cpld.c	71;"	d	file:
@@ -1267,12 +1261,12 @@ VEEX_KEY_BACKLIGHT	examples/ux400keys.c	73;"	d	file:
 VEEX_KEY_BACKLIGHT	examples/ux400poweroff.c	71;"	d	file:
 VEEX_KEY_BACKLIGHT	examples/ux400updatepower.c	71;"	d	file:
 VEEX_KEY_BACKLIGHT	examples/ux400upower.c	69;"	d	file:
-VEEX_KEY_BACKLIGHT	examples/ux400vfl.c	71;"	d	file:
+VEEX_KEY_BACKLIGHT	examples/ux400vfl.c	54;"	d	file:
 VEEX_KEY_FILE	examples/main.c	71;"	d	file:
 VEEX_KEY_FILE	examples/sdupfail.c	44;"	d	file:
-VEEX_KEY_FILE	examples/simple.c	44;"	d	file:
+VEEX_KEY_FILE	examples/simple.c	57;"	d	file:
 VEEX_KEY_FILE	examples/ux40040gsn.c	74;"	d	file:
-VEEX_KEY_FILE	examples/ux400bl.c	74;"	d	file:
+VEEX_KEY_FILE	examples/ux400bl.c	43;"	d	file:
 VEEX_KEY_FILE	examples/ux400bootkey.c	49;"	d	file:
 VEEX_KEY_FILE	examples/ux400buzz.c	74;"	d	file:
 VEEX_KEY_FILE	examples/ux400cpld.c	74;"	d	file:
@@ -1281,12 +1275,12 @@ VEEX_KEY_FILE	examples/ux400keys.c	76;"	d	file:
 VEEX_KEY_FILE	examples/ux400poweroff.c	74;"	d	file:
 VEEX_KEY_FILE	examples/ux400updatepower.c	74;"	d	file:
 VEEX_KEY_FILE	examples/ux400upower.c	72;"	d	file:
-VEEX_KEY_FILE	examples/ux400vfl.c	74;"	d	file:
+VEEX_KEY_FILE	examples/ux400vfl.c	57;"	d	file:
 VEEX_KEY_HELP	examples/main.c	70;"	d	file:
 VEEX_KEY_HELP	examples/sdupfail.c	43;"	d	file:
-VEEX_KEY_HELP	examples/simple.c	43;"	d	file:
+VEEX_KEY_HELP	examples/simple.c	56;"	d	file:
 VEEX_KEY_HELP	examples/ux40040gsn.c	73;"	d	file:
-VEEX_KEY_HELP	examples/ux400bl.c	73;"	d	file:
+VEEX_KEY_HELP	examples/ux400bl.c	42;"	d	file:
 VEEX_KEY_HELP	examples/ux400bootkey.c	48;"	d	file:
 VEEX_KEY_HELP	examples/ux400buzz.c	73;"	d	file:
 VEEX_KEY_HELP	examples/ux400cpld.c	73;"	d	file:
@@ -1295,12 +1289,12 @@ VEEX_KEY_HELP	examples/ux400keys.c	75;"	d	file:
 VEEX_KEY_HELP	examples/ux400poweroff.c	73;"	d	file:
 VEEX_KEY_HELP	examples/ux400updatepower.c	73;"	d	file:
 VEEX_KEY_HELP	examples/ux400upower.c	71;"	d	file:
-VEEX_KEY_HELP	examples/ux400vfl.c	73;"	d	file:
+VEEX_KEY_HELP	examples/ux400vfl.c	56;"	d	file:
 VEEX_KEY_HISTORY	examples/main.c	72;"	d	file:
 VEEX_KEY_HISTORY	examples/sdupfail.c	45;"	d	file:
-VEEX_KEY_HISTORY	examples/simple.c	45;"	d	file:
+VEEX_KEY_HISTORY	examples/simple.c	58;"	d	file:
 VEEX_KEY_HISTORY	examples/ux40040gsn.c	75;"	d	file:
-VEEX_KEY_HISTORY	examples/ux400bl.c	75;"	d	file:
+VEEX_KEY_HISTORY	examples/ux400bl.c	44;"	d	file:
 VEEX_KEY_HISTORY	examples/ux400bootkey.c	50;"	d	file:
 VEEX_KEY_HISTORY	examples/ux400buzz.c	75;"	d	file:
 VEEX_KEY_HISTORY	examples/ux400cpld.c	75;"	d	file:
@@ -1309,12 +1303,12 @@ VEEX_KEY_HISTORY	examples/ux400keys.c	77;"	d	file:
 VEEX_KEY_HISTORY	examples/ux400poweroff.c	75;"	d	file:
 VEEX_KEY_HISTORY	examples/ux400updatepower.c	75;"	d	file:
 VEEX_KEY_HISTORY	examples/ux400upower.c	73;"	d	file:
-VEEX_KEY_HISTORY	examples/ux400vfl.c	75;"	d	file:
+VEEX_KEY_HISTORY	examples/ux400vfl.c	58;"	d	file:
 VEEX_KEY_SUMARY	examples/main.c	69;"	d	file:
 VEEX_KEY_SUMARY	examples/sdupfail.c	42;"	d	file:
-VEEX_KEY_SUMARY	examples/simple.c	42;"	d	file:
+VEEX_KEY_SUMARY	examples/simple.c	55;"	d	file:
 VEEX_KEY_SUMARY	examples/ux40040gsn.c	72;"	d	file:
-VEEX_KEY_SUMARY	examples/ux400bl.c	72;"	d	file:
+VEEX_KEY_SUMARY	examples/ux400bl.c	41;"	d	file:
 VEEX_KEY_SUMARY	examples/ux400bootkey.c	47;"	d	file:
 VEEX_KEY_SUMARY	examples/ux400buzz.c	72;"	d	file:
 VEEX_KEY_SUMARY	examples/ux400cpld.c	72;"	d	file:
@@ -1323,7 +1317,7 @@ VEEX_KEY_SUMARY	examples/ux400keys.c	74;"	d	file:
 VEEX_KEY_SUMARY	examples/ux400poweroff.c	72;"	d	file:
 VEEX_KEY_SUMARY	examples/ux400updatepower.c	72;"	d	file:
 VEEX_KEY_SUMARY	examples/ux400upower.c	70;"	d	file:
-VEEX_KEY_SUMARY	examples/ux400vfl.c	72;"	d	file:
+VEEX_KEY_SUMARY	examples/ux400vfl.c	55;"	d	file:
 VERSION	Makefile	/^VERSION = 0.19$/;"	m
 VERSION	bindings/Makefile	/^VERSION = 0.19$/;"	m
 VERSION	bindings/python/Makefile	/^VERSION = 0.19$/;"	m
@@ -1332,8 +1326,8 @@ VERSION	doc/Makefile	/^VERSION = 0.19$/;"	m
 VERSION	examples/Makefile	/^VERSION = 0.19$/;"	m
 VERSION	src/Makefile	/^VERSION = 0.19$/;"	m
 VFL_BLINK	examples/main.c	45;"	d	file:
+VFL_BLINK	examples/simple.c	37;"	d	file:
 VFL_BLINK	examples/ux40040gsn.c	48;"	d	file:
-VFL_BLINK	examples/ux400bl.c	48;"	d	file:
 VFL_BLINK	examples/ux400buzz.c	48;"	d	file:
 VFL_BLINK	examples/ux400cpld.c	48;"	d	file:
 VFL_BLINK	examples/ux400fanoff.c	48;"	d	file:
@@ -1341,10 +1335,10 @@ VFL_BLINK	examples/ux400keys.c	50;"	d	file:
 VFL_BLINK	examples/ux400poweroff.c	48;"	d	file:
 VFL_BLINK	examples/ux400updatepower.c	48;"	d	file:
 VFL_BLINK	examples/ux400upower.c	46;"	d	file:
-VFL_BLINK	examples/ux400vfl.c	48;"	d	file:
+VFL_BLINK	examples/ux400vfl.c	37;"	d	file:
 VFL_OFF	examples/main.c	44;"	d	file:
+VFL_OFF	examples/simple.c	36;"	d	file:
 VFL_OFF	examples/ux40040gsn.c	47;"	d	file:
-VFL_OFF	examples/ux400bl.c	47;"	d	file:
 VFL_OFF	examples/ux400buzz.c	47;"	d	file:
 VFL_OFF	examples/ux400cpld.c	47;"	d	file:
 VFL_OFF	examples/ux400fanoff.c	47;"	d	file:
@@ -1352,10 +1346,10 @@ VFL_OFF	examples/ux400keys.c	49;"	d	file:
 VFL_OFF	examples/ux400poweroff.c	47;"	d	file:
 VFL_OFF	examples/ux400updatepower.c	47;"	d	file:
 VFL_OFF	examples/ux400upower.c	45;"	d	file:
-VFL_OFF	examples/ux400vfl.c	47;"	d	file:
+VFL_OFF	examples/ux400vfl.c	36;"	d	file:
 VFL_ON	examples/main.c	43;"	d	file:
+VFL_ON	examples/simple.c	35;"	d	file:
 VFL_ON	examples/ux40040gsn.c	46;"	d	file:
-VFL_ON	examples/ux400bl.c	46;"	d	file:
 VFL_ON	examples/ux400buzz.c	46;"	d	file:
 VFL_ON	examples/ux400cpld.c	46;"	d	file:
 VFL_ON	examples/ux400fanoff.c	46;"	d	file:
@@ -1363,10 +1357,10 @@ VFL_ON	examples/ux400keys.c	48;"	d	file:
 VFL_ON	examples/ux400poweroff.c	46;"	d	file:
 VFL_ON	examples/ux400updatepower.c	46;"	d	file:
 VFL_ON	examples/ux400upower.c	44;"	d	file:
-VFL_ON	examples/ux400vfl.c	46;"	d	file:
+VFL_ON	examples/ux400vfl.c	35;"	d	file:
 VFL_STABLE	examples/main.c	46;"	d	file:
+VFL_STABLE	examples/simple.c	38;"	d	file:
 VFL_STABLE	examples/ux40040gsn.c	49;"	d	file:
-VFL_STABLE	examples/ux400bl.c	49;"	d	file:
 VFL_STABLE	examples/ux400buzz.c	49;"	d	file:
 VFL_STABLE	examples/ux400cpld.c	49;"	d	file:
 VFL_STABLE	examples/ux400fanoff.c	49;"	d	file:
@@ -1374,10 +1368,9 @@ VFL_STABLE	examples/ux400keys.c	51;"	d	file:
 VFL_STABLE	examples/ux400poweroff.c	49;"	d	file:
 VFL_STABLE	examples/ux400updatepower.c	49;"	d	file:
 VFL_STABLE	examples/ux400upower.c	47;"	d	file:
-VFL_STABLE	examples/ux400vfl.c	49;"	d	file:
+VFL_STABLE	examples/ux400vfl.c	38;"	d	file:
 VFL_TEST	examples/main.c	37;"	d	file:
 VFL_TEST	examples/ux40040gsn.c	40;"	d	file:
-VFL_TEST	examples/ux400vfl.c	40;"	d	file:
 WAIT_ON_HIGH	src/ftdi.h	93;"	d
 WAIT_ON_LOW	src/ftdi.h	94;"	d
 WRITE_EXTENDED	src/ftdi.h	104;"	d
@@ -2269,7 +2262,6 @@ open	ftdipp/ftdi.cpp	/^int Context::open(struct usb_device *dev)$/;"	f	class:Ftd
 opm_pwr	examples/main.c	/^int opm_pwr(unsigned int on)$/;"	f
 opm_pwr	examples/testopm.c	/^int opm_pwr(unsigned int on)$/;"	f
 opm_pwr	examples/ux40040gsn.c	/^int opm_pwr(unsigned int on)$/;"	f
-opm_pwr	examples/ux400bl.c	/^int opm_pwr(unsigned int on)$/;"	f
 opm_pwr	examples/ux400cpld.c	/^int opm_pwr(unsigned int on)$/;"	f
 opm_pwr	examples/ux400fanoff.c	/^int opm_pwr(unsigned int on)$/;"	f
 opm_pwr	examples/ux400keys.c	/^int opm_pwr(unsigned int on)$/;"	f
@@ -2277,7 +2269,6 @@ opm_pwr	examples/ux400opm-new.c	/^int opm_pwr(unsigned int on)$/;"	f
 opm_pwr	examples/ux400opm.c	/^int opm_pwr(unsigned int on)$/;"	f
 opm_pwr	examples/ux400poweroff.c	/^int opm_pwr(unsigned int on)$/;"	f
 opm_pwr	examples/ux400updatepower.c	/^int opm_pwr(unsigned int on)$/;"	f
-opm_pwr	examples/ux400vfl.c	/^int opm_pwr(unsigned int on)$/;"	f
 out_ep	src/ftdi.h	/^    int out_ep;      \/* 1 or 2 *\/$/;"	m	struct:ftdi_context
 out_is_isochronous	src/ftdi.h	/^    int out_is_isochronous;$/;"	m	struct:ftdi_eeprom
 pdfdir	Makefile	/^pdfdir = ${docdir}$/;"	m
@@ -2628,8 +2619,8 @@ vendor	ftdipp/ftdi.cpp	/^const std::string& Context::vendor()$/;"	f	class:Ftdi::
 vendor_id	src/ftdi.h	/^    int vendor_id;$/;"	m	struct:ftdi_eeprom
 version	bindings/python/setup.py	/^      version='0.19',$/;"	v
 vfl_pwr	examples/main.c	/^int vfl_pwr(unsigned int on, unsigned int blink)$/;"	f
+vfl_pwr	examples/simple.c	/^int vfl_pwr(unsigned int on, unsigned int blink)$/;"	f
 vfl_pwr	examples/ux40040gsn.c	/^int vfl_pwr(unsigned int on, unsigned int blink)$/;"	f
-vfl_pwr	examples/ux400bl.c	/^int vfl_pwr(unsigned int on, unsigned int blink)$/;"	f
 vfl_pwr	examples/ux400cpld.c	/^int vfl_pwr(unsigned int on, unsigned int blink)$/;"	f
 vfl_pwr	examples/ux400fanoff.c	/^int vfl_pwr(unsigned int on, unsigned int blink)$/;"	f
 vfl_pwr	examples/ux400keys.c	/^int vfl_pwr(unsigned int on, unsigned int blink)$/;"	f
